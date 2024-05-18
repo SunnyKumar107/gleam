@@ -1,10 +1,5 @@
-import { Button } from '@/components/ui/button'
+ import { redirect } from "next/navigation";
 
-export default function Home() {
-  return (
-    <div>
-      <h1 className="text-3xl font-bold">Hello World</h1>
-      <Button className="mt-2">Click Me</Button>
-    </div>
-  )
+export default function Home(){
+  redirect('/dashboard')
 }
