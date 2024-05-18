@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "prisma migrate deploy && next build",
     "start": "next start",
     "lint": "next lint",
     "studio": "prisma studio"
@@ -16,6 +16,7 @@
     "clsx": "^2.1.1",
     "lucide-react": "^0.378.0",
     "next": "14.2.3",
+    "next-auth": "^5.0.0-beta.18",
     "prisma": "^5.14.0",
     "react": "^18",
     "react-dom": "^18",
