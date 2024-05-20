@@ -1,9 +1,19 @@
-import type { NextAuthConfig } from 'next-auth'
+import type { NextAuthConfig, Session } from 'next-auth'
+import { User } from '@prisma/client'
+
+export type UserData = Omit<User, 'password'>
+
+declare module 'next-auth' {
+  interface Session {
+    user: UserData
+  }
+}
 
 export const authConfig = {
   pages: {
     signIn: '/login'
   },
+  session: { strategy: 'jwt' },
   callbacks: {
     authorized({ auth, request: { nextUrl } }) {
       const isLoggedIn = !!auth?.user
@@ -15,6 +25,15 @@ export const authConfig = {
         return Response.redirect(new URL('/dashboard', nextUrl))
       }
       return true
+    },
+    async jwt({ token, user }) {
+      if (user) {
+        return { token, user }
+      }
+      return token
+    },
+    async session({ session, token }) {
+      return { session, user: token.user } as unknown as Session
     }
   },
   providers: [] // Add providers with an empty array for now

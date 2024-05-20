@@ -1,6 +1,6 @@
 'use server'
 
-import { signIn } from '@/auth'
+import { signIn, signOut } from '@/auth'
 import { prisma } from '@/lib/db'
 import { AuthError } from 'next-auth'
 import bcrypt from 'bcrypt'
@@ -28,6 +28,10 @@ export async function loginUser(
     }
     throw error
   }
+}
+
+export async function logoutUser() {
+  await signOut()
 }
 
 export async function createUser(
@@ -81,7 +85,7 @@ export async function createUser(
 
 export async function getUserByEmail(email: string) {
   try {
-    const user = prisma.user.findUnique({ where: { email } })
+    const user = await prisma.user.findUnique({ where: { email } })
     return user
   } catch (error) {
     throw new Error('Failed to fetch user')

@@ -5,13 +5,11 @@ import { getUserByEmail } from './actions/user'
 import bcrypt from 'bcrypt'
 import { z } from 'zod'
 
-type User = {}
-
-export const { auth, signIn, signOut } = NextAuth({
+export const { handlers, auth, signIn, signOut } = NextAuth({
   ...authConfig,
   providers: [
     Credentials({
-      async authorize(credentials): Promise<User | null> {
+      async authorize(credentials): Promise<Record<string, unknown> | null> {
         const parsedCredentials = z
           .object({ email: z.string().email(), password: z.string().min(6) })
           .safeParse(credentials)
@@ -22,7 +20,10 @@ export const { auth, signIn, signOut } = NextAuth({
           if (!user) return null
 
           const passwordsMatch = await bcrypt.compare(password, user.password)
-          if (passwordsMatch) return user
+          if (passwordsMatch) {
+            const { password, ...userWithoutPassword } = user
+            return userWithoutPassword
+          }
         }
         return null
       }
