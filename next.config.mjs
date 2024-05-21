@@ -1,4 +1,12 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {};
+const nextConfig = {
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'i.pravatar.cc' // placeholder user images
+      }
+    ]
+  }
+}
 
-export default nextConfig;
+export default nextConfig

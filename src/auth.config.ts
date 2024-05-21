@@ -21,8 +21,16 @@ export const authConfig = {
       if (isOnDashboard) {
         if (isLoggedIn) return true
         return false // Redirect unauthenticated users to login page
-      } else if (isLoggedIn) {
-        return Response.redirect(new URL('/dashboard', nextUrl))
+      }
+
+      const isOnAuth =
+        nextUrl.pathname.startsWith('/login') ||
+        nextUrl.pathname.startsWith('/register')
+
+      if (isOnAuth) {
+        if (isLoggedIn) {
+          return Response.redirect(new URL('/dashboard', nextUrl))
+        }
       }
       return true
     },
