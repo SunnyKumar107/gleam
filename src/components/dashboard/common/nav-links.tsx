@@ -19,14 +19,9 @@ const links = [
     icon: Home
   },
   {
-    name: 'Messages',
-    href: '/dashboard/messages',
-    icon: MessageCircle
-  },
-  {
-    name: 'Notifications',
-    href: '/dashboard/notifications',
-    icon: Bell
+    name: 'Favorites',
+    href: '/dashboard/favorites',
+    icon: Star
   },
   {
     name: 'Discover',
@@ -34,14 +29,19 @@ const links = [
     icon: Telescope
   },
   {
+    name: 'Notifications',
+    href: '/dashboard/notifications',
+    icon: Bell
+  },
+  {
+    name: 'Messages',
+    href: '/dashboard/messages',
+    icon: MessageCircle
+  },
+  {
     name: 'Settings',
     href: '/dashboard/settings',
     icon: Settings
-  },
-  {
-    name: 'Favorites',
-    href: '/dashboard/favorites',
-    icon: Star
   }
 ]
 
@@ -49,18 +49,25 @@ export default function NavLinks() {
   const pathname = usePathname()
 
   return (
-    <div className="flex flex-1 flex-col justify-center space-y-6">
+    <div className="flex flex-1 justify-between md:flex-col md:justify-start md:space-y-6 md:py-6">
       {links.map((link) => {
         const Icon = link.icon
         return (
           <Link
             href={link.href}
             key={link.href}
-            className={cn('flex gap-4 font-medium text-foreground/50', {
-              'font-semibold text-foreground': link.href === pathname
-            })}
+            className={cn(
+              'flex w-full items-center justify-center gap-4 font-medium text-foreground/50 hover:font-medium hover:text-foreground md:h-auto md:justify-start',
+              {
+                'hidden md:flex': link.name === 'Settings'
+              },
+              {
+                'font-semibold text-foreground': link.href === pathname
+              }
+            )}
           >
-            <Icon strokeWidth={link.href === pathname ? 2.5 : 2} /> {link.name}
+            <Icon strokeWidth={link.href === pathname ? 2.5 : 2} />{' '}
+            <p className="hidden md:block">{link.name}</p>
           </Link>
         )
       })}
