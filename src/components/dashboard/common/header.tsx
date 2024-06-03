@@ -4,7 +4,7 @@ import Link from 'next/link'
 import Logo from './gleam-logo'
 import { cn } from '@/lib/utils'
 import { usePathname } from 'next/navigation'
-import { MessageCircle } from 'lucide-react'
+import { MessageCircleMore } from 'lucide-react'
 
 const Header = () => {
   const pathname = usePathname()
@@ -22,7 +22,7 @@ const Header = () => {
           }
         )}
       >
-        <MessageCircle
+        <MessageCircleMore
           strokeWidth={'/dashboard/settings' === pathname ? 2.5 : 2}
         />
       </Link>

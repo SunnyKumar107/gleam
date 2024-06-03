@@ -5,7 +5,7 @@ import { cn } from '@/lib/utils'
 import {
   Bell,
   Home,
-  MessageCircle,
+  MessageCircleMore,
   Settings,
   Star,
   Telescope
@@ -36,7 +36,7 @@ const links = [
   {
     name: 'Messages',
     href: '/dashboard/messages',
-    icon: MessageCircle
+    icon: MessageCircleMore
   },
   {
     name: 'Settings',
