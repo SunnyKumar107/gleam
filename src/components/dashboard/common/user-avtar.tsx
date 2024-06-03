@@ -7,7 +7,7 @@ type UserAvatarProps = {
 
 export default function UserAvatar({ user }: UserAvatarProps) {
   return (
-    <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary">
+    <div className="flex h-7 w-7 items-center justify-center rounded-full bg-primary md:h-12 md:w-12">
       {user.image ? (
         <Image
           width={48}
@@ -18,7 +18,7 @@ export default function UserAvatar({ user }: UserAvatarProps) {
         />
       ) : (
         <div className="text-xl font-bold text-primary-foreground">
-          {user.name[0] + user.name[1]}
+          {user.name[0]}
         </div>
       )}
     </div>

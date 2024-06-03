@@ -49,7 +49,7 @@ export default function NavLinks() {
   const pathname = usePathname()
 
   return (
-    <div className="flex flex-1 justify-between md:flex-col md:justify-start md:space-y-6 md:py-6">
+    <div className="flex flex-1 justify-center md:w-full md:flex-col md:justify-start md:space-y-6 md:py-6">
       {links.map((link) => {
         const Icon = link.icon
         return (
@@ -59,7 +59,8 @@ export default function NavLinks() {
             className={cn(
               'flex w-full items-center justify-center gap-4 font-medium text-foreground/50 hover:font-medium hover:text-foreground md:h-auto md:justify-start',
               {
-                'hidden md:flex': link.name === 'Settings'
+                'hidden md:flex':
+                  link.name === 'Settings' || link.name === 'Messages'
               },
               {
                 'font-semibold text-foreground': link.href === pathname
