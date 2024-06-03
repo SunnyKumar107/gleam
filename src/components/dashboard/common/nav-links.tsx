@@ -57,7 +57,7 @@ export default function NavLinks() {
             href={link.href}
             key={link.href}
             className={cn(
-              'flex w-full items-center justify-center gap-4 font-medium text-foreground/50 hover:font-medium hover:text-foreground md:h-auto md:justify-start',
+              'flex w-full items-center justify-center gap-4 font-medium text-foreground/60 hover:font-medium hover:text-foreground md:h-auto md:justify-start',
               {
                 'hidden md:flex':
                   link.name === 'Settings' || link.name === 'Messages'

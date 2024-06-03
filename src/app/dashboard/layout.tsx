@@ -15,7 +15,7 @@ export default async function RootLayout({ children }: RootLayoutProps) {
       <main className="relative">
         <Header />
         <SideNav />
-        <div className="ml-64">{children}</div>
+        <div className="bg-background md:ml-64 md:p-2">{children}</div>
       </main>
     </SessionProvider>
   )

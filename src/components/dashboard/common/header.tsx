@@ -10,13 +10,13 @@ const Header = () => {
   const pathname = usePathname()
 
   return (
-    <div className="fixed top-0 z-10 flex h-[60px] w-screen items-center justify-between bg-white p-4 md:hidden">
+    <div className="fixed top-0 z-10 flex h-16 w-screen items-center justify-between bg-white px-3 md:hidden">
       <Logo />
       <Link
         href={'/dashboard/messages'}
         key={'/dashboard/messages'}
         className={cn(
-          'font-medium text-foreground/50 hover:font-medium hover:text-foreground',
+          'font-medium text-foreground/80 hover:font-medium hover:text-foreground',
           {
             'font-semibold text-foreground': '/dashboard/settings' === pathname
           }
