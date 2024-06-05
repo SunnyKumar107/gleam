@@ -8,7 +8,8 @@ import {
   MessageCircleMore,
   Settings,
   Star,
-  Telescope
+  Telescope,
+  Plus
 } from 'lucide-react'
 import Link from 'next/link'
 
@@ -27,6 +28,11 @@ const links = [
     name: 'Discover',
     href: '/dashboard/discover',
     icon: Telescope
+  },
+  {
+    name: 'Create',
+    href: '/dashboard/create',
+    icon: Plus
   },
   {
     name: 'Notifications',
@@ -49,7 +55,7 @@ export default function NavLinks() {
   const pathname = usePathname()
 
   return (
-    <div className="flex flex-1 justify-center md:w-full md:flex-col md:justify-start md:space-y-6 md:py-6">
+    <div className="flex flex-1 justify-center md:w-full md:flex-col md:justify-start md:space-y-6 md:py-2">
       {links.map((link) => {
         const Icon = link.icon
         return (
@@ -60,7 +66,9 @@ export default function NavLinks() {
               'flex w-full items-center justify-center gap-4 font-medium text-foreground/60 hover:font-medium hover:text-foreground md:h-auto md:justify-start',
               {
                 'hidden md:flex':
-                  link.name === 'Settings' || link.name === 'Messages'
+                  link.name === 'Settings' ||
+                  link.name === 'Messages' ||
+                  link.name === 'Create'
               },
               {
                 'font-semibold text-foreground': link.href === pathname

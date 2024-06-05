@@ -1,19 +1,40 @@
 'use client'
 
 import {
+  Bookmark,
   Dot,
   EllipsisVertical,
   Heart,
-  MessageSquareMore,
-  Share2
+  MessageSquareMore
 } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useState } from 'react'
 
-const Post = () => {
+type PostProps = {
+  post: {
+    id: number
+    image: string
+    caption: string | null
+    createdAt: Date
+    author: {
+      id: number
+      email: string
+      username: string
+      password: string
+      name: string
+      image: string | null
+      bio: string | null
+      createdAt: Date
+      updatedAt: Date
+    }
+  }
+}
+
+const Post = ({ post }: PostProps) => {
   const [isLike, setIsLike] = useState(false)
   const [totalLikes, setTotalLikes] = useState(0)
+  const [savePost, setSavePost] = useState(false)
 
   const handleUpdateLike = async () => {
     setIsLike(!isLike)
@@ -23,6 +44,10 @@ const Post = () => {
     }
 
     setTotalLikes(totalLikes + 1)
+  }
+
+  const handleSavePost = async () => {
+    setSavePost(!savePost)
   }
 
   return (
@@ -37,7 +62,9 @@ const Post = () => {
             className="items-centre flex h-8 w-8 overflow-hidden rounded-full bg-gray-200"
           >
             <Image
-              src={'https://i.pravatar.cc/300'}
+              src={
+                post.author.image ? post.author.image : '/images/user-avtar.png'
+              }
               alt={'avatar'}
               width={40}
               height={40}
@@ -46,7 +73,7 @@ const Post = () => {
           <div className="ml-2 flex items-center">
             <Link href={`/dashboard/user`}>
               <h3 className="flex items-center text-sm font-semibold">
-                John Doe
+                {post.author.username}
                 <Dot />
               </h3>
             </Link>
@@ -56,12 +83,12 @@ const Post = () => {
           </div>
         </div>
         <div>
-          <EllipsisVertical />
+          <EllipsisVertical size={18} />
         </div>
       </div>
       <div className="flex max-h-[500px] w-full items-center overflow-hidden bg-gray-200">
         <Image
-          src={'https://i.pravatar.cc/300'}
+          src={post.image}
           alt={'caption'}
           width={500}
           height={500}
@@ -78,7 +105,9 @@ const Post = () => {
           </Link>
         </div>
         <div>
-          <Share2 />
+          <button onClick={handleSavePost}>
+            {savePost ? <Bookmark fill="#000" /> : <Bookmark />}
+          </button>
         </div>
       </div>
       {totalLikes ? (
@@ -86,10 +115,14 @@ const Post = () => {
           {totalLikes} {totalLikes === 1 ? 'like' : 'likes'}
         </div>
       ) : null}
-      <div className="flex gap-2 px-2 text-sm sm:px-1">
-        <h3 className="flex items-center font-semibold">John Doe</h3>{' '}
-        <span className="">Hello world</span>
-      </div>
+      {post.caption && (
+        <div className="flex gap-2 px-2 text-sm sm:px-1">
+          <h3 className="flex items-center font-semibold">
+            {post.author.username}
+          </h3>{' '}
+          <span className="">{post.caption}</span>
+        </div>
+      )}
     </div>
   )
 }

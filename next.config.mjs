@@ -3,7 +3,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'i.pravatar.cc' // placeholder user images
+        hostname: '**' // placeholder user images
       }
     ]
   }
