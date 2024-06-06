@@ -1,8 +1,6 @@
 import { getPostTable } from '@/actions/post'
+import { CreatePost } from '@/components/dashboard/create-post'
 import Post from '@/components/dashboard/post'
-import { Button } from '@/components/ui/button'
-import { Plus } from 'lucide-react'
-import Link from 'next/link'
 
 export default async function Dashboard() {
   const posts = await getPostTable()
@@ -12,12 +10,7 @@ export default async function Dashboard() {
       {posts.map((post) => (
         <Post key={post.id} post={post} />
       ))}
-      <Link
-        href={'/dashboard/create'}
-        className="fixed bottom-16 right-5 rounded-full bg-foreground p-2 text-primary-foreground shadow md:hidden"
-      >
-        <Plus size={25} strokeWidth={3} />
-      </Link>
+      <CreatePost screen="mobile" />
     </div>
   )
 }

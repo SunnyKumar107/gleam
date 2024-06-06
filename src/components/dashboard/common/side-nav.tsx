@@ -6,6 +6,7 @@ import Link from 'next/link'
 import UserAvatar from './user-avtar'
 import LogoutButton from './logout-button'
 import Logo from './gleam-logo'
+import { CreatePost } from '../create-post'
 
 export default async function SideNav() {
   const session = await auth()
@@ -17,6 +18,7 @@ export default async function SideNav() {
         <Logo />
       </div>
       <NavLinks />
+      <CreatePost screen="desktop" />
       <Link
         href="/dashboard/profile"
         className="flex w-1/5 flex-wrap items-center justify-center gap-3 md:w-full md:justify-between"

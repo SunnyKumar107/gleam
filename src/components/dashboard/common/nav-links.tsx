@@ -30,11 +30,6 @@ const links = [
     icon: Telescope
   },
   {
-    name: 'Create',
-    href: '/dashboard/create',
-    icon: Plus
-  },
-  {
     name: 'Notifications',
     href: '/dashboard/notifications',
     icon: Bell
@@ -66,9 +61,7 @@ export default function NavLinks() {
               'flex w-full items-center justify-center gap-4 font-medium text-foreground/60 hover:font-medium hover:text-foreground md:h-auto md:justify-start',
               {
                 'hidden md:flex':
-                  link.name === 'Settings' ||
-                  link.name === 'Messages' ||
-                  link.name === 'Create'
+                  link.name === 'Settings' || link.name === 'Messages'
               },
               {
                 'font-semibold text-foreground': link.href === pathname

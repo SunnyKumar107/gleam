@@ -31,7 +31,11 @@ export async function createPost({
     })
 
     if (!validatedPost.success) {
-      return 'Missing Fields. Failed to Create User.'
+      return {
+        success: false,
+        status: 400,
+        message: 'Missing Fields. Failed to Create Post.'
+      }
     }
 
     await prisma.post.create({
@@ -39,8 +43,16 @@ export async function createPost({
         ...validatedPost.data
       }
     })
-    console.log('post created')
+    return {
+      success: true,
+      status: 200,
+      message: 'Post created successfully'
+    }
   } catch (error) {
-    throw error
+    return {
+      success: false,
+      status: 500,
+      message: 'Something went wrong'
+    }
   }
 }
