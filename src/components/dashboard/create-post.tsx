@@ -38,26 +38,19 @@ export function CreatePost({ screen }: { screen?: string }) {
   }
 
   const handleCreatePost = async () => {
-    if (!imgUrl) {
-      toast({
-        title: 'Please upload image',
-        description: 'Image is required',
-        variant: 'destructive'
-      })
-      return
-    }
-
     setLoading(true)
     const res = await createPost({
       image: imgUrl,
       caption: caption,
-      authorId: session?.user.id as number
+      authorId: Number(session?.user.id)
     })
 
     if (res.success) {
       toast({
         title: 'Post created successfully'
       })
+
+      setImgUrl('')
     } else {
       handleDeleteImg()
       toast({
@@ -68,17 +61,14 @@ export function CreatePost({ screen }: { screen?: string }) {
     }
     setLoading(false)
     setCaption('')
-    setImgUrl('')
+    console.log(res.message)
   }
 
   return (
     <Dialog>
       <DialogTrigger asChild>
         {screen === 'mobile' ? (
-          <Button
-            size={'icon'}
-            className="fixed bottom-20 right-5 rounded-full md:hidden"
-          >
+          <Button size={'icon'} className="fixed bottom-20 right-5 md:hidden">
             <Plus />
           </Button>
         ) : (
@@ -144,7 +134,11 @@ export function CreatePost({ screen }: { screen?: string }) {
           </div>
         </div>
         <DialogFooter>
-          <Button onClick={handleCreatePost} className="min-w-[100px]">
+          <Button
+            onClick={handleCreatePost}
+            className="min-w-[100px]"
+            disabled={loading || !imgUrl}
+          >
             {loading ? (
               <LoaderCircle size={15} className="h-4 w-4 animate-spin" />
             ) : (
