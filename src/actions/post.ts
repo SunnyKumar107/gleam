@@ -24,13 +24,11 @@ export async function createPost({
   authorId: number
 }) {
   try {
-    console.log(image, caption, authorId, typeof authorId)
     const validatedPost = RegisterPostSchema.safeParse({
       image: image,
       caption: caption,
       authorId: authorId
     })
-    console.log(validatedPost)
 
     if (!validatedPost.success) {
       return {

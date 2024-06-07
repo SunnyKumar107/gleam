@@ -61,7 +61,6 @@ export function CreatePost({ screen }: { screen?: string }) {
     }
     setLoading(false)
     setCaption('')
-    console.log(res.message)
   }
 
   return (
@@ -83,7 +82,7 @@ export function CreatePost({ screen }: { screen?: string }) {
         </DialogHeader>
         <div className="flex w-full flex-col items-center justify-center">
           {imgUrl ? (
-            <div className="relative max-h-[360px] w-full overflow-hidden">
+            <div className="relative max-h-[360px] w-full overflow-hidden bg-background/50">
               <Image
                 src={imgUrl}
                 alt="imgUrl-upload"

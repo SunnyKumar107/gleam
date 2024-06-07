@@ -6,6 +6,7 @@ import { NextSSRPlugin } from '@uploadthing/react/next-ssr-plugin'
 import { extractRouterConfig } from 'uploadthing/server'
 
 import { ourFileRouter } from './api/uploadthing/core'
+import { Toaster } from '@/components/ui/toaster'
 
 export const metadata: Metadata = {
   title: 'Gleam',
@@ -33,6 +34,7 @@ export default function RootLayout({
           routerConfig={extractRouterConfig(ourFileRouter)}
         />
         {children}
+        <Toaster />
       </body>
     </html>
   )
