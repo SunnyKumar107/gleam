@@ -1,3 +1,5 @@
+'use server'
+
 import { prisma } from '@/lib/db'
 import { RegisterPostSchema } from '@/schema/post.schema'
 
