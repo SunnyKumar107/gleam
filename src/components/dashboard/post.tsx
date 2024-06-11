@@ -28,7 +28,7 @@ type PostProps = {
       createdAt: Date
       updatedAt: Date
     }
-  }
+  } | null
 }
 
 const Post = ({ post }: PostProps) => {
@@ -50,6 +50,8 @@ const Post = ({ post }: PostProps) => {
     setSavePost(!savePost)
   }
 
+  if (!post) return
+
   return (
     <div
       className="flex w-screen flex-col  border-b-[1px] border-gray-200
@@ -58,7 +60,7 @@ const Post = ({ post }: PostProps) => {
       <div className="flex w-full items-center justify-between px-2 py-2 md:px-1">
         <div className="flex items-center">
           <Link
-            href={`/dashboard/user`}
+            href={`/dashboard/${post.author.username}`}
             className="items-centre flex h-8 w-8 overflow-hidden rounded-full bg-gray-200"
           >
             <Image
@@ -100,7 +102,7 @@ const Post = ({ post }: PostProps) => {
           <button onClick={handleUpdateLike}>
             {isLike ? <Heart color="#ff0000" fill="#ff0000" /> : <Heart />}
           </button>
-          <Link href={`/post/1`}>
+          <Link href={`/dashboard/post/${post.id}`}>
             <MessageSquareMore />
           </Link>
         </div>

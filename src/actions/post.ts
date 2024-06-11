@@ -16,6 +16,22 @@ export async function getPostTable() {
   return posts
 }
 
+export async function getPostById(id: number) {
+  const post = await prisma.post.findUnique({
+    where: {
+      id
+    },
+    select: {
+      id: true,
+      image: true,
+      caption: true,
+      createdAt: true,
+      author: true
+    }
+  })
+  return post
+}
+
 export async function createPost({
   image,
   caption,
