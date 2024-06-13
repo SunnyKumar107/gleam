@@ -10,7 +10,9 @@ export async function getPostTable() {
       image: true,
       caption: true,
       createdAt: true,
-      author: true
+      author: true,
+      postLikes: true,
+      comments: true
     }
   })
   return posts
@@ -26,7 +28,9 @@ export async function getPostById(id: number) {
       image: true,
       caption: true,
       createdAt: true,
-      author: true
+      author: true,
+      postLikes: true,
+      comments: true
     }
   })
   return post
@@ -71,6 +75,55 @@ export async function createPost({
       success: false,
       status: 500,
       message: 'Something went wrong'
+    }
+  }
+}
+
+export async function likePost({
+  postId,
+  authorId
+}: {
+  postId: number
+  authorId: number
+}) {
+  try {
+    await prisma.postLike.create({
+      data: {
+        postId: postId,
+        authorId: authorId
+      }
+    })
+    return {
+      success: true,
+      message: 'like added',
+      statuscode: 200
+    }
+  } catch (error) {
+    return {
+      success: false,
+      message: 'server error',
+      statuscode: 500
+    }
+  }
+}
+
+export async function removeLikePost({ authorId }: { authorId: number }) {
+  try {
+    await prisma.postLike.delete({
+      where: {
+        authorId
+      }
+    })
+    return {
+      success: true,
+      message: 'like removed',
+      statuscode: 200
+    }
+  } catch (error) {
+    return {
+      success: false,
+      message: 'server error',
+      statuscode: 500
     }
   }
 }

@@ -5,6 +5,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 import { useToast } from '../ui/use-toast'
 import { Send, SendHorizontal } from 'lucide-react'
+import { addComment } from '@/actions/comment'
 
 const AddComment = ({ postId }: { postId: string }) => {
   const [comment, setComment] = useState('')
@@ -18,11 +19,16 @@ const AddComment = ({ postId }: { postId: string }) => {
   }, [comment])
 
   const handleAddComment = async () => {
-    if (!comment) {
+    const res = await addComment({
+      authorId: Number(session?.user.id),
+      postId: Number(postId),
+      text: comment
+    })
+    console.log('message', res?.message)
+    if (res?.success) {
+      setComment('')
       toast({
-        title: 'Comment cannot be empty',
-        description: 'Please enter a comment',
-        variant: 'destructive'
+        title: 'Comment added successfully'
       })
       return
     }
