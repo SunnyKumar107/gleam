@@ -1,22 +1,57 @@
 'use client'
 
+import { likeComment, removeLikeComment } from '@/actions/comment'
 import { Heart } from 'lucide-react'
+import { useSession } from 'next-auth/react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
-const Comment = ({ comment }: { comment: any }) => {
-  const [totalLikes, setTotalLikes] = useState(0)
+type CommentProps = {
+  comment: {
+    id: number
+    text: string
+    createdAt: Date
+    updatedAt: Date
+    author: {
+      username: string
+      image: string | null
+    }
+    commentLikes: {
+      id: number
+      authorId: number
+    }[]
+  }
+}
+
+const Comment = ({ comment }: CommentProps) => {
+  const [totalLikes, setTotalLikes] = useState(comment.commentLikes.length)
   const [isLike, setIsLike] = useState(false)
+  const { data: session } = useSession()
+
+  const isUserLike = comment.commentLikes.find(
+    (like: { authorId: number }) => like.authorId == Number(session?.user.id)
+  )
+
+  useEffect(() => {
+    if (isUserLike) {
+      setIsLike(true)
+    }
+  }, [session])
 
   const handleUpdateLike = async () => {
     setIsLike(!isLike)
     if (isLike) {
       setTotalLikes(totalLikes - 1)
+      await removeLikeComment({ likeId: isUserLike?.id as number })
       return
     }
 
     setTotalLikes(totalLikes + 1)
+    await likeComment({
+      commentId: Number(comment?.id),
+      authorId: Number(session?.user.id)
+    })
   }
 
   return (

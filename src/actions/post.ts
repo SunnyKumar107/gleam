@@ -107,11 +107,11 @@ export async function likePost({
   }
 }
 
-export async function removeLikePost({ authorId }: { authorId: number }) {
+export async function removeLikePost({ likeId }: { likeId: number }) {
   try {
     await prisma.postLike.delete({
       where: {
-        authorId
+        id: likeId
       }
     })
     return {

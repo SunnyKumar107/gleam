@@ -3,6 +3,27 @@
 import { prisma } from '@/lib/db'
 import { RegisterCommentSchema } from '@/schema/comment.schema'
 
+export async function getCommentsByPostId(postId: number) {
+  try {
+    const comments = await prisma.comment.findMany({
+      where: {
+        postId
+      },
+      select: {
+        id: true,
+        text: true,
+        createdAt: true,
+        updatedAt: true,
+        author: true,
+        commentLikes: true
+      }
+    })
+    return comments
+  } catch (error) {
+    throw error
+  }
+}
+
 export async function addComment({
   authorId,
   postId,
@@ -31,7 +52,79 @@ export async function addComment({
         ...validatedComment.data
       }
     })
+    return {
+      success: true,
+      status: 200,
+      message: 'Comment added successfully'
+    }
   } catch (error) {
     throw error
+  }
+}
+
+export async function deleteComment({ commentId }: { commentId: number }) {
+  try {
+    await prisma.comment.delete({
+      where: {
+        id: commentId
+      }
+    })
+
+    return {
+      success: true,
+      status: 200,
+      message: 'Comment deleted successfully'
+    }
+  } catch (error) {
+    throw error
+  }
+}
+
+export async function likeComment({
+  commentId,
+  authorId
+}: {
+  commentId: number
+  authorId: number
+}) {
+  try {
+    await prisma.commentLike.create({
+      data: {
+        commentId: commentId,
+        authorId: authorId
+      }
+    })
+    return {
+      success: true,
+      message: 'like added',
+      statuscode: 200
+    }
+  } catch (error) {
+    return {
+      success: false,
+      message: 'server error',
+      statuscode: 500
+    }
+  }
+}
+
+export async function removeLikeComment({ likeId }: { likeId: number }) {
+  try {
+    await prisma.postLike.delete({
+      where: {
+        id: likeId
+      }
+    })
+    return {
+      success: true,
+      message: 'like removed',
+      statuscode: 200
+    }
+  } catch (error) {
+    return {
+      success: false,
+      message: 'server error',
+      statuscode: 500
+    }
   }
 }

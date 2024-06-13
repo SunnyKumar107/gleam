@@ -21,22 +21,12 @@ type PostProps = {
     caption: string | null
     createdAt: Date
     author: {
-      id: number
-      email: string
       username: string
-      password: string
-      name: string
       image: string | null
-      bio: string | null
-      createdAt: Date
-      updatedAt: Date
     }
     postLikes: {
       id: number
       authorId: number
-      postId: number
-      createdAt: Date
-      updatedAt: Date
     }[]
     comments: {
       id: number
@@ -65,7 +55,7 @@ const Post = ({ post }: PostProps) => {
     setIsLike(!isLike)
     if (isLike) {
       setTotalLikes(totalLikes - 1)
-      await removeLikePost({ authorId: Number(session?.user.id) })
+      await removeLikePost({ likeId: isUserLike?.id as number })
       return
     }
 
