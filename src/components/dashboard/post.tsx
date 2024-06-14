@@ -93,7 +93,7 @@ const Post = ({ post }: PostProps) => {
             />
           </Link>
           <div className="ml-2 flex items-center">
-            <Link href={`/dashboard/user`}>
+            <Link href={`/dashboard/${post.author.username}`}>
               <h3 className="flex items-center text-sm font-semibold">
                 {post.author.username}
                 <Dot />

@@ -46,7 +46,7 @@ export default function LoginForm() {
             type="button"
             onClick={() => setShowPassword(!showPassword)}
           >
-            {showPassword ? <LucideEye /> : <EyeOff />}
+            {showPassword ? <EyeOff /> : <LucideEye />}
           </button>
         </div>
 

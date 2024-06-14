@@ -85,9 +85,30 @@ export async function createUser(
 
 export async function getUserByEmail(email: string) {
   try {
-    const user = await prisma.user.findUnique({ where: { email } })
+    const user = await prisma.user.findUnique({
+      where: { email }
+    })
     return user
   } catch (error) {
-    throw new Error('Failed to fetch user')
+    throw new Error('Failed to fetch user by email')
+  }
+}
+
+export async function getUserByUsername(username: string) {
+  try {
+    const user = await prisma.user.findUnique({
+      where: { username }, select: {
+        id: true,
+        name: true,
+        username: true,
+        email: true,
+        bio: true,
+        image: true,
+        posts: true
+      }
+    })
+    return user
+  } catch (error) {
+    throw new Error('Failed to fetch user by username')
   }
 }
