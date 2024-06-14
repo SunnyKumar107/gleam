@@ -147,9 +147,9 @@ const Post = ({ post }: PostProps) => {
       )}
       {post.comments.length > 0 && (
         <Link
-          href={`dashboard/post/${post.id}`}
-          className={`cursor-pointer px-2 text-sm font-normal text-foreground/10 md:px-1 ${
-            pathname === `dashboard/post/${post.id}` && 'hidden'
+          href={`/dashboard/post/${post.id}`}
+          className={`cursor-pointer px-2 text-sm font-normal text-foreground/70 md:px-1 ${
+            pathname === `/dashboard/post/${post.id}` && 'hidden'
           }`}
         >
           View {post.comments.length > 1 ? 'all' : ''} {post.comments.length}{' '}
