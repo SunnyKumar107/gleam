@@ -73,10 +73,7 @@ const Post = ({ post }: PostProps) => {
   if (!post) return
 
   return (
-    <div
-      className="flex w-screen flex-col  border-b-[1px] border-foreground/10
-        pb-1 sm:w-[480px]"
-    >
+    <div className="flex w-screen flex-col pb-1 sm:w-[480px]">
       <div className="flex w-full items-center justify-between px-2 py-2 md:px-1">
         <div className="flex items-center">
           <Link

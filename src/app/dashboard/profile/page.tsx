@@ -1,6 +1,6 @@
 import { getUserByUsername } from '@/actions/user'
 import { auth } from '@/auth'
-import Profile from '@/components/dashboard/common/user-profile'
+import Profile from '@/components/dashboard/user-profile'
 
 export default async function ProfilePage() {
   const session = await auth()

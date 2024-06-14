@@ -8,7 +8,7 @@ import Link from 'next/link'
 type PostType = {
   id: number
   image: string
-  caption: string
+  caption: string | null
   createdAt: Date
 }
 
@@ -21,11 +21,13 @@ type UserProps = {
     bio: string | null
     image: string | null
     posts: PostType[]
-  }
+  } | null
 }
 
 const Profile = ({ user }: UserProps) => {
   const { data: session } = useSession()
+
+  if (!user) return
 
   const reversedPosts = user.posts.reverse()
 
@@ -95,7 +97,7 @@ const Profile = ({ user }: UserProps) => {
               <Image
                 className="h-full w-full object-cover"
                 src={post.image}
-                alt={post.caption}
+                alt={post.caption ? post.caption : 'Post Image'}
                 width={400}
                 height={500}
               />
