@@ -9,7 +9,7 @@ export default async function Dashboard() {
   return (
     <>
       <Header type="home" />
-      <div className=" mb-12 mt-14 flex flex-col flex-wrap gap-2 sm:px-10 md:mb-0 md:mt-0 md:px-14 xl:px-24">
+      <div className=" mb-12 mt-14 flex flex-col flex-wrap gap-2 pt-2 sm:px-10 md:mb-0 md:mt-0 md:px-14 xl:px-24">
         {posts.map((post) => (
           <Post key={post.id} post={post} />
         ))}
