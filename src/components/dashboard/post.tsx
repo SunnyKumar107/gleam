@@ -1,6 +1,7 @@
 'use client'
 
 import { likePost, removeLikePost } from '@/actions/post'
+import { cn } from '@/lib/utils'
 import {
   Bookmark,
   Dot,
@@ -73,7 +74,11 @@ const Post = ({ post }: PostProps) => {
   if (!post) return
 
   return (
-    <div className="flex w-screen flex-col pb-1 sm:w-[480px]">
+    <div
+      className={cn('flex w-screen flex-col pb-1 sm:w-[480px]', {
+        'border-b border-foreground/10': pathname !== '/dashboard'
+      })}
+    >
       <div className="flex w-full items-center justify-between px-2 py-2 md:px-1">
         <div className="flex items-center">
           <Link
