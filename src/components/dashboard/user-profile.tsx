@@ -32,7 +32,7 @@ const Profile = ({ user }: UserProps) => {
   const reversedPosts = user.posts.reverse()
 
   return (
-    <div className="mb-12 mt-16 flex h-[calc(100vh-100px)] flex-col justify-start py-4 md:mb-0 md:mt-0 md:h-[calc(100vh)] md:px-4 md:py-8 lg:px-16">
+    <div className="mb-12 mt-14 flex h-[calc(100vh-100px)] flex-col justify-start py-4 md:mb-0 md:mt-0 md:h-[calc(100vh)] md:px-4 md:py-8 lg:px-16">
       <div className="h-fit w-full border-b border-gray-300 px-0 xl:px-12">
         <div className="flex w-screen items-center justify-between space-x-4 px-6 md:w-full md:justify-start lg:space-x-8">
           <div className="h-20 w-20 overflow-hidden rounded-full bg-gray-200 md:h-28 md:w-28 lg:h-36 lg:w-36">

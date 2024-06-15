@@ -1,5 +1,4 @@
 import { auth } from '@/auth'
-import Header from '@/components/dashboard/common/header'
 import SideNav from '@/components/dashboard/common/side-nav'
 import { SessionProvider } from 'next-auth/react'
 
@@ -13,7 +12,6 @@ export default async function RootLayout({ children }: RootLayoutProps) {
   return (
     <SessionProvider session={session}>
       <main>
-        <Header />
         <SideNav />
         <div className="bg-background md:ml-64 md:p-2">{children}</div>
       </main>
