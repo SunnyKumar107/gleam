@@ -92,6 +92,7 @@ const Post = ({ post }: PostProps) => {
               alt={'avatar'}
               width={40}
               height={40}
+              className="min-h-8 object-cover"
             />
           </Link>
           <div className="ml-2 flex items-center">

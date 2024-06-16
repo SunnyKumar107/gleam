@@ -28,7 +28,7 @@ const Header = ({ type, username }: { type: string; username?: string }) => {
           <Link href={'/dashboard'}>
             <ArrowLeft />
           </Link>
-          <h2 className="text-xl font-medium">{username}</h2>
+          <h2 className="text-xl font-semibold">{username}</h2>
         </div>
       )}
       {type === 'profile' && (
@@ -59,7 +59,17 @@ const Header = ({ type, username }: { type: string; username?: string }) => {
           <Link href={'/dashboard'}>
             <ArrowLeft />
           </Link>
-          <h2 className="text-xl font-medium">{username}</h2>
+          <h2 className="text-xl font-semibold">{username}</h2>
+        </div>
+      )}
+
+      {/* Edit page */}
+      {type === 'edit' && (
+        <div className="flex items-center space-x-4">
+          <Link href={'/dashboard/profile'}>
+            <ArrowLeft />
+          </Link>
+          <h2 className="text-xl font-medium">Edit</h2>
         </div>
       )}
     </div>

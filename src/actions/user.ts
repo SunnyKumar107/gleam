@@ -97,7 +97,8 @@ export async function getUserByEmail(email: string) {
 export async function getUserByUsername(username: string) {
   try {
     const user = await prisma.user.findUnique({
-      where: { username }, select: {
+      where: { username },
+      select: {
         id: true,
         name: true,
         username: true,
@@ -110,5 +111,34 @@ export async function getUserByUsername(username: string) {
     return user
   } catch (error) {
     throw new Error('Failed to fetch user by username')
+  }
+}
+
+export async function updateUser({
+  id,
+  name,
+  username,
+  bio,
+  image
+}: {
+  id: number
+  name: string
+  username: string
+  bio: string | null
+  image: string | null
+}) {
+  try {
+    const user = await prisma.user.update({
+      where: { id },
+      data: {
+        name,
+        username,
+        bio,
+        image
+      }
+    })
+    return { success: true, status: 200, message: 'User updated successfully' }
+  } catch (error) {
+    throw new Error('Failed to update user')
   }
 }
