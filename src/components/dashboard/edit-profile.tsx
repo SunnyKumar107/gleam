@@ -2,7 +2,6 @@
 
 import { UploadButton } from '@/utils/uploadthing'
 import { useEffect, useState } from 'react'
-import { useSession } from 'next-auth/react'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { useToast } from '../ui/use-toast'
@@ -13,8 +12,13 @@ import { Label } from '../ui/label'
 import { Input } from '../ui/input'
 import { Textarea } from '../ui/textarea'
 import { Button } from '../ui/button'
+import { UserData } from '@/auth.config'
 
-const EditProfile = () => {
+type UserProps = {
+  user: UserData | null
+}
+
+const EditProfile = ({ user }: UserProps) => {
   const [imgUrl, setImgUrl] = useState<string | null>(null)
   const [fullName, setFullName] = useState('')
   const [username, setUsername] = useState('')
@@ -23,21 +27,18 @@ const EditProfile = () => {
   const [delLoading, setDelLoading] = useState(false)
   const [msg, setMsg] = useState('')
   const [loading, setLoading] = useState(false)
-  const { data: session } = useSession()
   const { toast } = useToast()
   const router = useRouter()
 
+  if (!user) return
+
   useEffect(() => {
-    if (session) {
-      if (!imgUrl) {
-        setImgUrl(session.user.image)
-      }
-      setFullName(session.user.name)
-      setUsername(session.user.username)
-      setUniqueUsername(session.user.username)
-      setBio(session.user.bio)
-    }
-  }, [session, router])
+    setImgUrl(user.image)
+    setFullName(user.name)
+    setUsername(user.username)
+    setUniqueUsername(user.username)
+    setBio(user.bio)
+  }, [user, router])
 
   const handleDeleteImg = async () => {
     if (imgUrl) {
@@ -51,28 +52,29 @@ const EditProfile = () => {
   }
 
   let isUpdate =
-    session?.user.name !== fullName ||
-    session.user.username !== uniqueUsername ||
-    session.user.bio !== bio ||
-    session.user.image !== imgUrl
+    user.name !== fullName ||
+    user.username !== uniqueUsername ||
+    user.bio !== bio ||
+    user.image !== imgUrl
 
   const isUsernameExist = async (uname: string) => {
     setUsername(uname.trim())
     setMsg('')
-    if (uname === session?.user.username) {
-      setUniqueUsername(session?.user.username)
+    if (uname === user.username) {
+      setUniqueUsername(user.username)
+      isUpdate = false
       return
     }
 
     if (uname.length < 3) {
-      setUniqueUsername(session?.user.username as string)
+      setUniqueUsername(user.username as string)
       setMsg('username must be at least 3 characters')
       return
     }
 
-    const user = await getUserByUsername(uname)
-    if (user) {
-      setUniqueUsername(session?.user.username as string)
+    const exist = await getUserByUsername(uname)
+    if (exist) {
+      setUniqueUsername(user.username as string)
       setMsg('username already exist')
       return
     } else {
@@ -85,7 +87,7 @@ const EditProfile = () => {
     setLoading(true)
     if (isUpdate) {
       const res = await updateUser({
-        id: Number(session?.user.id),
+        id: Number(user.id),
         name: fullName,
         username: uniqueUsername,
         bio: bio,
