@@ -82,7 +82,11 @@ const Post = ({ post }: PostProps) => {
       <div className="flex w-full items-center justify-between px-2 py-2 md:px-1">
         <div className="flex items-center">
           <Link
-            href={`/dashboard/${post.author.username}`}
+            href={
+              session?.user.username === post.author.username
+                ? '/dashboard/profile'
+                : `/dashboard/user/${post.author.username}`
+            }
             className="items-centre flex h-8 w-8 overflow-hidden rounded-full bg-foreground/10"
           >
             <Image
@@ -96,7 +100,13 @@ const Post = ({ post }: PostProps) => {
             />
           </Link>
           <div className="ml-2 flex items-center">
-            <Link href={`/dashboard/${post.author.username}`}>
+            <Link
+              href={
+                session?.user.username === post.author.username
+                  ? '/dashboard/profile'
+                  : `/dashboard/user/${post.author.username}`
+              }
+            >
               <h3 className="flex items-center text-sm font-semibold">
                 {post.author.username}
                 <Dot />

@@ -58,7 +58,11 @@ const Comment = ({ comment }: CommentProps) => {
     <div className="flex w-full justify-between px-2 py-3 md:px-1">
       <div className="flex items-start space-x-3">
         <Link
-          href={`/${comment.author.username}`}
+          href={
+            session?.user.username === comment.author.username
+              ? '/dashboard/profile'
+              : `/dashboard/user/${comment.author.username}`
+          }
           className="h-9 w-9 overflow-hidden rounded-full bg-gray-200"
         >
           <Image
@@ -68,14 +72,18 @@ const Comment = ({ comment }: CommentProps) => {
                 ? comment.author.image
                 : '/images/user-avtar.png'
             }
-            alt={`${comment.author.username}`}
+            alt={comment.author.username}
             width={40}
             height={40}
           />
         </Link>
         <div className="flex max-w-[300px] flex-col justify-start md:max-w-[350px]">
           <Link
-            href={`/dashboard/${comment.author.username}`}
+            href={
+              session?.user.username === comment.author.username
+                ? '/dashboard/profile'
+                : `/dashboard/user/${comment.author.username}`
+            }
             className="text-xs font-medium"
           >
             {comment.author.username}
