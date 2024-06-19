@@ -6,7 +6,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 type PostType = {
-  id: number
+  id: string
   image: string
   caption: string | null
   createdAt: Date
@@ -14,7 +14,7 @@ type PostType = {
 
 type UserProps = {
   user: {
-    id: number
+    id: string
     name: string
     username: string
     email: string
@@ -37,7 +37,7 @@ const Profile = ({ user }: UserProps) => {
         <div className="flex w-screen items-center justify-between space-x-4 px-6 md:w-full md:justify-start lg:space-x-8">
           <div className="h-20 w-20 overflow-hidden rounded-full bg-gray-200 md:h-28 md:w-28 lg:h-36 lg:w-36">
             <Image
-              className="min-h-full w-full object-cover"
+              className="h-full w-full object-cover"
               src={user.image ? user.image : '/images/user-avtar.png'}
               alt={user.username}
               width={50}

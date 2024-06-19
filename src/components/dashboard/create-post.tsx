@@ -42,7 +42,7 @@ export function CreatePost({ screen }: { screen?: string }) {
     const res = await createPost({
       image: imgUrl,
       caption: caption,
-      authorId: Number(session?.user.id)
+      authorId: session?.user.id!
     })
 
     if (res.success) {

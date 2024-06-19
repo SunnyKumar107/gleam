@@ -9,7 +9,7 @@ import { useState, useEffect } from 'react'
 
 type CommentProps = {
   comment: {
-    id: number
+    id: string
     text: string
     createdAt: Date
     updatedAt: Date
@@ -18,8 +18,8 @@ type CommentProps = {
       image: string | null
     }
     commentLikes: {
-      id: number
-      authorId: number
+      id: string
+      authorId: string
     }[]
   }
 }
@@ -30,7 +30,7 @@ const Comment = ({ comment }: CommentProps) => {
   const { data: session } = useSession()
 
   const isUserLike = comment.commentLikes.find(
-    (like: { authorId: number }) => like.authorId == Number(session?.user.id)
+    (like: { authorId: string }) => like.authorId == session?.user.id
   )
 
   useEffect(() => {
@@ -43,14 +43,14 @@ const Comment = ({ comment }: CommentProps) => {
     setIsLike(!isLike)
     if (isLike) {
       setTotalLikes(totalLikes - 1)
-      await removeLikeComment({ likeId: isUserLike?.id as number })
+      await removeLikeComment({ likeId: isUserLike?.id! })
       return
     }
 
     setTotalLikes(totalLikes + 1)
     await likeComment({
-      commentId: Number(comment?.id),
-      authorId: Number(session?.user.id)
+      commentId: comment?.id,
+      authorId: session?.user.id!
     })
   }
 

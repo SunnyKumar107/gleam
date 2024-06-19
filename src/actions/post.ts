@@ -18,7 +18,7 @@ export async function getPostTable() {
   return posts
 }
 
-export async function getPostById(id: number) {
+export async function getPostById(id: string) {
   const post = await prisma.post.findUnique({
     where: {
       id
@@ -43,7 +43,7 @@ export async function createPost({
 }: {
   image: string
   caption: string
-  authorId: number
+  authorId: string
 }) {
   try {
     const validatedPost = RegisterPostSchema.safeParse({
@@ -83,8 +83,8 @@ export async function likePost({
   postId,
   authorId
 }: {
-  postId: number
-  authorId: number
+  postId: string
+  authorId: string
 }) {
   try {
     await prisma.postLike.create({
@@ -107,7 +107,7 @@ export async function likePost({
   }
 }
 
-export async function removeLikePost({ likeId }: { likeId: number }) {
+export async function removeLikePost({ likeId }: { likeId: string }) {
   try {
     await prisma.postLike.delete({
       where: {

@@ -121,14 +121,14 @@ export async function updateUser({
   bio,
   image
 }: {
-  id: number
+  id: string
   name: string
   username: string
   bio: string | null
   image: string | null
 }) {
   try {
-    const user = await prisma.user.update({
+    await prisma.user.update({
       where: { id },
       data: {
         name,

@@ -3,7 +3,7 @@
 import { prisma } from '@/lib/db'
 import { RegisterCommentSchema } from '@/schema/comment.schema'
 
-export async function getCommentsByPostId(postId: number) {
+export async function getCommentsByPostId(postId: string) {
   try {
     const comments = await prisma.comment.findMany({
       where: {
@@ -29,8 +29,8 @@ export async function addComment({
   postId,
   text
 }: {
-  authorId: number
-  postId: number
+  authorId: string
+  postId: string
   text: string
 }) {
   try {
@@ -62,7 +62,7 @@ export async function addComment({
   }
 }
 
-export async function deleteComment({ commentId }: { commentId: number }) {
+export async function deleteComment({ commentId }: { commentId: string }) {
   try {
     await prisma.comment.delete({
       where: {
@@ -84,8 +84,8 @@ export async function likeComment({
   commentId,
   authorId
 }: {
-  commentId: number
-  authorId: number
+  commentId: string
+  authorId: string
 }) {
   try {
     await prisma.commentLike.create({
@@ -108,7 +108,7 @@ export async function likeComment({
   }
 }
 
-export async function removeLikeComment({ likeId }: { likeId: number }) {
+export async function removeLikeComment({ likeId }: { likeId: string }) {
   try {
     await prisma.postLike.delete({
       where: {

@@ -5,7 +5,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 import { useToast } from '../ui/use-toast'
 import { Send, SendHorizontal } from 'lucide-react'
-import { addComment, deleteComment } from '@/actions/comment'
+import { addComment } from '@/actions/comment'
 
 const AddComment = ({ postId }: { postId: string }) => {
   const [comment, setComment] = useState('')
@@ -19,10 +19,9 @@ const AddComment = ({ postId }: { postId: string }) => {
   }, [comment])
 
   const handleAddComment = async () => {
-    // await deleteComment({ commentId: Number(comment) })
     const res = await addComment({
-      authorId: Number(session?.user.id),
-      postId: Number(postId),
+      authorId: session?.user.id!,
+      postId: postId,
       text: comment
     })
 

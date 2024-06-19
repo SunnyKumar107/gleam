@@ -9,7 +9,7 @@ export default async function ProfilePage() {
 
   return (
     <>
-      <Header type="profile" username={user?.username} />
+      <Header type="profile" name={session?.user.username} />
       <Profile user={user} />
     </>
   )

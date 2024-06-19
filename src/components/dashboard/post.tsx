@@ -17,7 +17,7 @@ import { useEffect, useState } from 'react'
 
 type PostProps = {
   post: {
-    id: number
+    id: string
     image: string
     caption: string | null
     createdAt: Date
@@ -26,11 +26,11 @@ type PostProps = {
       image: string | null
     }
     postLikes: {
-      id: number
-      authorId: number
+      id: string
+      authorId: string
     }[]
     comments: {
-      id: number
+      id: string
     }[]
   } | null
 }
@@ -43,7 +43,7 @@ const Post = ({ post }: PostProps) => {
   const pathname = usePathname()
 
   const isUserLike = post?.postLikes.find(
-    (like: { authorId: number }) => like.authorId == Number(session?.user.id)
+    (like: { authorId: string }) => like.authorId == session?.user.id
   )
 
   useEffect(() => {
@@ -56,14 +56,14 @@ const Post = ({ post }: PostProps) => {
     setIsLike(!isLike)
     if (isLike) {
       setTotalLikes(totalLikes - 1)
-      await removeLikePost({ likeId: isUserLike?.id as number })
+      await removeLikePost({ likeId: isUserLike?.id! })
       return
     }
 
     setTotalLikes(totalLikes + 1)
     await likePost({
-      postId: Number(post?.id),
-      authorId: Number(session?.user.id)
+      postId: post?.id!,
+      authorId: session?.user.id!
     })
   }
 

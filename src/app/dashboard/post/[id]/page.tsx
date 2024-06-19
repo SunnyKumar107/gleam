@@ -6,9 +6,8 @@ import { getCommentsByPostId } from '@/actions/comment'
 import Header from '@/components/dashboard/common/header'
 
 const post = async ({ params }: { params: { id: string } }) => {
-  const postId = Number(params.id)
+  const postId = params.id
   const post = await getPostById(postId)
-
   const comments = await getCommentsByPostId(postId)
 
   return (

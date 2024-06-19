@@ -21,7 +21,7 @@ export const UserSchema = z.object({
       required_error: 'Password is required.'
     })
     .min(6, 'Password must have at least 6 characters.'),
-  id: z.number(),
+  id: z.string(),
   createdAt: z.date(),
   updatedAt: z.date(),
   image: z.string().url().optional(),

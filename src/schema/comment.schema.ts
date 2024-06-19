@@ -1,10 +1,10 @@
 import { z } from 'zod'
 
 export const commentSchema = z.object({
-  id: z.number(),
+  id: z.string(),
   text: z.string(),
-  postId: z.number(),
-  authorId: z.number(),
+  postId: z.string(),
+  authorId: z.string(),
   createdAt: z.date(),
   updatedAt: z.date()
 })

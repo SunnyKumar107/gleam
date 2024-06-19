@@ -1,5 +1,5 @@
 import { ChevronRight } from 'lucide-react'
-import { getUserByEmail, logoutUser } from '@/actions/user'
+import { logoutUser } from '@/actions/user'
 import NavLinks from './nav-links'
 import { auth } from '@/auth'
 import Link from 'next/link'
@@ -10,7 +10,7 @@ import { CreatePost } from '../create-post'
 
 export default async function SideNav() {
   const session = await auth()
-  const user = await getUserByEmail(session?.user.email as string)
+  const user = session?.user!
 
   return (
     <section className="wrap fixed bottom-0 flex h-12 w-full border-t border-foreground/10 bg-background md:h-screen md:max-w-64 md:flex-col md:gap-6 md:border-r md:border-t-0 md:px-8 md:py-4">

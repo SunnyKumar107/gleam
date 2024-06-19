@@ -13,9 +13,10 @@ import { Input } from '../ui/input'
 import { Textarea } from '../ui/textarea'
 import { Button } from '../ui/button'
 import { UserData } from '@/auth.config'
+import { useSession } from 'next-auth/react'
 
 type UserProps = {
-  user: UserData | null
+  user: UserData
 }
 
 const EditProfile = ({ user }: UserProps) => {
@@ -28,9 +29,8 @@ const EditProfile = ({ user }: UserProps) => {
   const [msg, setMsg] = useState('')
   const [loading, setLoading] = useState(false)
   const { toast } = useToast()
+  const { update } = useSession()
   const router = useRouter()
-
-  if (!user) return
 
   useEffect(() => {
     setImgUrl(user.image)
@@ -40,6 +40,17 @@ const EditProfile = ({ user }: UserProps) => {
     setBio(user.bio)
   }, [user, router])
 
+  const updateProfileImage = async () => {
+    await updateUser({
+      id: user.id,
+      name: fullName,
+      username: uniqueUsername,
+      bio: bio,
+      image: imgUrl
+    })
+    update({ ...user, image: imgUrl })
+  }
+
   const handleDeleteImg = async () => {
     if (imgUrl) {
       setDelLoading(true)
@@ -48,6 +59,7 @@ const EditProfile = ({ user }: UserProps) => {
         setDelLoading(false)
         setImgUrl('')
       }
+      updateProfileImage()
     }
   }
 
@@ -87,13 +99,20 @@ const EditProfile = ({ user }: UserProps) => {
     setLoading(true)
     if (isUpdate) {
       const res = await updateUser({
-        id: Number(user.id),
+        id: user.id,
         name: fullName,
         username: uniqueUsername,
         bio: bio,
         image: imgUrl
       })
       if (res.success) {
+        update({
+          ...user,
+          name: fullName,
+          username: uniqueUsername,
+          bio: bio,
+          image: imgUrl
+        })
         setLoading(false)
         toast({
           title: 'Profile Updated Successfully'
@@ -143,6 +162,7 @@ const EditProfile = ({ user }: UserProps) => {
             onUploadBegin={handleDeleteImg}
             onClientUploadComplete={(res: { url: string }[]) => {
               setImgUrl(res[0].url)
+              updateProfileImage()
             }}
             onUploadError={(error) => {
               toast({

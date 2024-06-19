@@ -5,7 +5,7 @@ import Logo from './gleam-logo'
 import { cn } from '@/lib/utils'
 import { ArrowLeft, MessageCircleMore, Settings } from 'lucide-react'
 
-const Header = ({ type, username }: { type: string; username?: string }) => {
+const Header = ({ type, name }: { type: string; name?: string }) => {
   return (
     <div className="fixed top-0 z-10 flex h-14 w-screen items-center justify-between bg-white px-3 md:hidden">
       {/* Home page */}
@@ -28,7 +28,7 @@ const Header = ({ type, username }: { type: string; username?: string }) => {
           <Link href={'/dashboard'}>
             <ArrowLeft />
           </Link>
-          <h2 className="text-xl font-semibold">{username}</h2>
+          <h2 className="text-xl font-semibold">{name}</h2>
         </div>
       )}
       {type === 'profile' && (
@@ -59,7 +59,7 @@ const Header = ({ type, username }: { type: string; username?: string }) => {
           <Link href={'/dashboard'}>
             <ArrowLeft />
           </Link>
-          <h2 className="text-xl font-semibold">{username}</h2>
+          <h2 className="text-xl font-semibold">{name}</h2>
         </div>
       )}
 

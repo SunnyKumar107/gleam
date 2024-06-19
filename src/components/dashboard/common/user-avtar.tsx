@@ -6,7 +6,7 @@ import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 
 type UserAvatarProps = {
-  user: UserData | null
+  user: UserData
 }
 
 export default function UserAvatar({ user }: UserAvatarProps) {
@@ -22,7 +22,7 @@ export default function UserAvatar({ user }: UserAvatarProps) {
         }
       )}
     >
-      {user?.image ? (
+      {user.image ? (
         <Image
           width={48}
           height={48}
@@ -32,7 +32,7 @@ export default function UserAvatar({ user }: UserAvatarProps) {
         />
       ) : (
         <div className="text-xl font-bold text-primary-foreground">
-          {user?.name[0]}
+          {user.name[0]}
         </div>
       )}
     </div>

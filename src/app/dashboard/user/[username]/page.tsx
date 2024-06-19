@@ -12,7 +12,7 @@ export default async function UserProfilePage({
 
   return (
     <>
-      <Header type="user" username={username} />
+      <Header type="user" name={username} />
       <Profile user={user} />
     </>
   )
