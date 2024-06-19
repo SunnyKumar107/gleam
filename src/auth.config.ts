@@ -34,7 +34,7 @@ export const authConfig = {
       }
       return true
     },
-    async jwt({ token, user }) {
+    async jwt({ token, trigger, user }) {
       if (user) {
         return { token, user }
       }

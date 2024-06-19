@@ -38,18 +38,7 @@ const EditProfile = ({ user }: UserProps) => {
     setUsername(user.username)
     setUniqueUsername(user.username)
     setBio(user.bio)
-  }, [user, router])
-
-  const updateProfileImage = async () => {
-    await updateUser({
-      id: user.id,
-      name: fullName,
-      username: uniqueUsername,
-      bio: bio,
-      image: imgUrl
-    })
-    update({ ...user, image: imgUrl })
-  }
+  }, [])
 
   const handleDeleteImg = async () => {
     if (imgUrl) {
@@ -57,9 +46,8 @@ const EditProfile = ({ user }: UserProps) => {
       const res = await deleteImage(imgUrl)
       if (res.success) {
         setDelLoading(false)
-        setImgUrl('')
+        setImgUrl(null)
       }
-      updateProfileImage()
     }
   }
 
@@ -129,6 +117,14 @@ const EditProfile = ({ user }: UserProps) => {
     }
   }
 
+  const isImgUpdate = user.image !== imgUrl
+
+  useEffect(() => {
+    if (isImgUpdate) {
+      handleSubmit()
+    }
+  }, [imgUrl])
+
   return (
     <form className="relative mt-14 h-[calc(100vh-56px)] bg-background px-4 py-4 md:mt-0 md:px-8 md:py-6">
       <div className="mb-4 flex items-center justify-between rounded-lg border bg-gray-50 p-4">
@@ -162,7 +158,6 @@ const EditProfile = ({ user }: UserProps) => {
             onUploadBegin={handleDeleteImg}
             onClientUploadComplete={(res: { url: string }[]) => {
               setImgUrl(res[0].url)
-              updateProfileImage()
             }}
             onUploadError={(error) => {
               toast({
