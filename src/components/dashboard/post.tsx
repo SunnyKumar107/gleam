@@ -1,9 +1,14 @@
 'use client'
 
-import { likePost, removeLikePost } from '@/actions/post'
+import {
+  RemoveFavoritePost,
+  addFavoritePost,
+  likePost,
+  removeLikePost
+} from '@/actions/post'
 import { cn } from '@/lib/utils'
 import {
-  Bookmark,
+  Star,
   Dot,
   EllipsisVertical,
   Heart,
@@ -29,26 +34,37 @@ type PostProps = {
       id: string
       authorId: string
     }[]
+    favoritedBy: {
+      authorId: string
+      id: string
+    }[]
     comments: {
       id: string
     }[]
-  } | null
+  }
 }
 
 const Post = ({ post }: PostProps) => {
   const [isLike, setIsLike] = useState(false)
-  const [totalLikes, setTotalLikes] = useState(post?.postLikes.length || 0)
-  const [savePost, setSavePost] = useState(false)
+  const [totalLikes, setTotalLikes] = useState(post.postLikes.length || 0)
+  const [favoritePost, setFavoritePost] = useState(false)
   const { data: session } = useSession()
   const pathname = usePathname()
 
-  const isUserLike = post?.postLikes.find(
-    (like: { authorId: string }) => like.authorId == session?.user.id
+  const isUserLike = post.postLikes.find(
+    (like: { authorId: string }) => like.authorId === session?.user.id
+  )
+
+  const isUserFavorite = post.favoritedBy.find(
+    (favorite: { authorId: string }) => favorite.authorId === session?.user.id
   )
 
   useEffect(() => {
     if (isUserLike) {
       setIsLike(true)
+    }
+    if (isUserFavorite) {
+      setFavoritePost(true)
     }
   }, [session])
 
@@ -62,16 +78,23 @@ const Post = ({ post }: PostProps) => {
 
     setTotalLikes(totalLikes + 1)
     await likePost({
-      postId: post?.id!,
+      postId: post.id,
       authorId: session?.user.id!
     })
   }
 
-  const handleSavePost = async () => {
-    setSavePost(!savePost)
-  }
+  const handleFavoritePost = async () => {
+    setFavoritePost(!favoritePost)
+    if (favoritePost) {
+      await RemoveFavoritePost({ favoritePostId: isUserFavorite?.id! })
+      return
+    }
 
-  if (!post) return
+    await addFavoritePost({
+      postId: post.id,
+      authorId: session?.user.id!
+    })
+  }
 
   return (
     <div
@@ -140,8 +163,8 @@ const Post = ({ post }: PostProps) => {
           </Link>
         </div>
         <div>
-          <button onClick={handleSavePost}>
-            {savePost ? <Bookmark fill="#000" /> : <Bookmark />}
+          <button onClick={handleFavoritePost}>
+            {favoritePost ? <Star fill="#000" /> : <Star />}
           </button>
         </div>
       </div>

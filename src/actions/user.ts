@@ -105,7 +105,8 @@ export async function getUserByUsername(username: string) {
         email: true,
         bio: true,
         image: true,
-        posts: true
+        posts: true,
+        favorites: true
       }
     })
     return user
@@ -140,5 +141,16 @@ export async function updateUser({
     return { success: true, status: 200, message: 'User updated successfully' }
   } catch (error) {
     throw new Error('Failed to update user')
+  }
+}
+
+export async function getFavorites(userId: string) {
+  try {
+    const favorites = await prisma.favoritePost.findMany({
+      where: { authorId: userId }, select: { id: true, post: true }
+    })
+    return favorites
+  } catch (error) {
+    throw new Error('Failed to fetch favorites')
   }
 }

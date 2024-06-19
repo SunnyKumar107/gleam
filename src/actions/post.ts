@@ -12,7 +12,8 @@ export async function getPostTable() {
       createdAt: true,
       author: true,
       postLikes: true,
-      comments: true
+      comments: true,
+      favoritedBy: true
     }
   })
   return posts
@@ -30,7 +31,8 @@ export async function getPostById(id: string) {
       createdAt: true,
       author: true,
       postLikes: true,
-      comments: true
+      comments: true,
+      favoritedBy: true
     }
   })
   return post
@@ -123,6 +125,53 @@ export async function removeLikePost({ likeId }: { likeId: string }) {
     return {
       success: false,
       message: 'server error',
+      statuscode: 500
+    }
+  }
+}
+
+export async function addFavoritePost({
+  postId,
+  authorId
+}: {
+  postId: string
+  authorId: string
+}) {
+  try {
+    await prisma.favoritePost.create({
+      data: {
+        postId: postId,
+        authorId: authorId
+      }
+    })
+    return {
+      success: true
+    }
+  } catch (error) {
+    return {
+      success: false,
+      statuscode: 500
+    }
+  }
+}
+
+export async function RemoveFavoritePost({
+  favoritePostId
+}: {
+  favoritePostId: string
+}) {
+  try {
+    await prisma.favoritePost.delete({
+      where: {
+        id: favoritePostId
+      }
+    })
+    return {
+      success: true
+    }
+  } catch (error) {
+    return {
+      success: false,
       statuscode: 500
     }
   }

@@ -22,6 +22,7 @@ model User {
   postLikes    PostLike[]
   comments     Comment[]
   commentLikes CommentLike[]
+  favorites    FavoritePost[]
 }
 
 
@@ -34,10 +35,21 @@ model Post {
   author       User     @relation(fields: [authorId], references: [id])
   authorId     String      
   postLikes    PostLike[]
+  favoritedBy  FavoritePost[]
   comments     Comment[]
 }
 
 model PostLike {
+  id         String      @id @default(cuid())
+  post       Post       @relation(fields: [postId], references: [id])
+  postId     String        
+  author     User       @relation(fields: [authorId], references: [id])
+  authorId   String        
+  createdAt  DateTime   @default(now())
+  updatedAt  DateTime   @updatedAt
+}
+
+model FavoritePost {
   id         String      @id @default(cuid())
   post       Post       @relation(fields: [postId], references: [id])
   postId     String        

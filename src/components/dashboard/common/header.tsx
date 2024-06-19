@@ -43,6 +43,16 @@ const Header = ({ type, name }: { type: string; name?: string }) => {
         </Link>
       )}
 
+      {/* Your profile page */}
+      {type === 'favorites' && (
+        <div className="flex items-center space-x-4">
+          <Link href={'/dashboard'}>
+            <ArrowLeft />
+          </Link>
+          <h2 className="text-xl font-semibold">Favorites</h2>
+        </div>
+      )}
+
       {/* Post page */}
       {type === 'post' && (
         <div className="flex items-center space-x-4">

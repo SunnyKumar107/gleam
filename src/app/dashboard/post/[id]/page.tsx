@@ -14,7 +14,7 @@ const post = async ({ params }: { params: { id: string } }) => {
     <>
       <Header type="post" />
       <div className="mb-12 mt-14 flex flex-col items-center pt-2 md:mb-0 md:mt-0 md:p-4 lg:flex-row lg:items-start lg:justify-center lg:space-x-4">
-        <Post post={post} />
+        <Post post={post!} />
         <div className="flex w-full flex-col sm:w-[480px] md:relative md:min-h-[560px] lg:border-t-0">
           <div className="mb-12 flex w-full flex-col flex-wrap">
             <div className="hidden px-2 py-3 md:block md:px-1">
