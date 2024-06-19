@@ -117,16 +117,11 @@ const EditProfile = ({ user }: UserProps) => {
     }
   }
 
-  const isImgUpdate = user.image !== imgUrl
-
-  useEffect(() => {
-    if (isImgUpdate) {
-      handleSubmit()
-    }
-  }, [imgUrl])
-
   return (
-    <form className="relative mt-14 h-[calc(100vh-56px)] bg-background px-4 py-4 md:mt-0 md:px-8 md:py-6">
+    <form
+      onSubmit={handleSubmit}
+      className="relative mt-14 h-[calc(100vh-56px)] bg-background px-4 py-4 md:mt-0 md:px-8 md:py-6"
+    >
       <div className="mb-4 flex items-center justify-between rounded-lg border bg-gray-50 p-4">
         <div className="relative">
           <div className="h-20 w-20 overflow-hidden rounded-full bg-foreground/10">
@@ -213,7 +208,6 @@ const EditProfile = ({ user }: UserProps) => {
       <Button
         className="float-right min-w-[100px]"
         disabled={!isUpdate || loading}
-        onClick={handleSubmit}
         type="submit"
       >
         {loading ? (
