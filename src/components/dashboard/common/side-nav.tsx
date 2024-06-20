@@ -21,7 +21,7 @@ export default async function SideNav() {
       <CreatePost screen="desktop" />
       <Link
         href="/dashboard/profile"
-        className="flex w-1/5 flex-wrap items-center justify-center gap-3 md:w-full md:justify-between"
+        className="flex w-1/4 flex-wrap items-center justify-center gap-3 md:w-full md:justify-between"
       >
         <UserAvatar user={user} />
         <div className="hidden flex-col items-start justify-center md:flex">

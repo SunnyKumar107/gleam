@@ -28,22 +28,24 @@ const links = [
     name: 'Discover',
     href: '/dashboard/discover',
     icon: Telescope
-  },
-  {
-    name: 'Notifications',
-    href: '/dashboard/notifications',
-    icon: Bell
-  },
-  {
-    name: 'Messages',
-    href: '/dashboard/messages',
-    icon: MessageCircleMore
-  },
-  {
-    name: 'Settings',
-    href: '/dashboard/settings',
-    icon: Settings
   }
+  // New features will be added
+
+  // {
+  //   name: 'Notifications',
+  //   href: '/dashboard/notifications',
+  //   icon: Bell
+  // },
+  // {
+  //   name: 'Messages',
+  //   href: '/dashboard/messages',
+  //   icon: MessageCircleMore
+  // },
+  // {
+  //   name: 'Settings',
+  //   href: '/dashboard/settings',
+  //   icon: Settings
+  // }
 ]
 
 export default function NavLinks() {

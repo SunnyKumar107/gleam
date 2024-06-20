@@ -16,12 +16,13 @@ export default function LogoutButton() {
     >
       {pending ? (
         <>
-          <LoaderCircle className="mb-0.5 mr-2 h-4 w-4 animate-spin" />
-          Logging out
+          <LoaderCircle className="mb-0.5 h-4 w-4 animate-spin" />
+          <p className="ml-2 hidden md:block"> Logging out</p>
         </>
       ) : (
         <>
-          <LogOut className="mr-2 h-4 w-4" /> Log Out
+          <LogOut className="h-4 w-4" />
+          <p className="ml-2 hidden md:block"> Log out</p>
         </>
       )}
     </Button>
