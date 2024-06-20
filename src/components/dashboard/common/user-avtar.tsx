@@ -24,8 +24,8 @@ export default function UserAvatar({ user }: UserAvatarProps) {
     >
       {user.image ? (
         <Image
-          width={48}
-          height={48}
+          width={100}
+          height={100}
           src={user.image}
           className="h-full w-full rounded-full object-cover"
           alt={user.username}

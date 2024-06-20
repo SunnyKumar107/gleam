@@ -52,8 +52,8 @@ const AddComment = ({ postId }: { postId: string }) => {
                 : '/images/user-avtar.png'
             }
             alt={session?.user.name || 'user avatar'}
-            width={40}
-            height={40}
+            width={100}
+            height={100}
           />
         </div>
         <div className="w-full">

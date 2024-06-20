@@ -14,6 +14,7 @@ import { Textarea } from '../ui/textarea'
 import { Button } from '../ui/button'
 import { UserData } from '@/auth.config'
 import { useSession } from 'next-auth/react'
+import { AlertDelete } from './common/delete-account-alert'
 
 type UserProps = {
   user: UserData
@@ -58,11 +59,11 @@ const EditProfile = ({ user }: UserProps) => {
     user.image !== imgUrl
 
   const isUsernameExist = async (uname: string) => {
-    setUsername(uname.trim())
+    setUsername(uname.trim().toLowerCase())
     setMsg('')
+    isUpdate = false
     if (uname === user.username) {
       setUniqueUsername(user.username)
-      isUpdate = false
       return
     }
 
@@ -83,7 +84,9 @@ const EditProfile = ({ user }: UserProps) => {
     }
   }
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    console.log('imgUrl', imgUrl)
     setLoading(true)
     if (isUpdate) {
       const res = await updateUser({
@@ -178,7 +181,7 @@ const EditProfile = ({ user }: UserProps) => {
         />
         <Label className="mb-4 px-3">Username</Label>
         <Input
-          className="mb-4"
+          className="mb-4 lowercase"
           id="username"
           type="text"
           name="username"
@@ -202,22 +205,24 @@ const EditProfile = ({ user }: UserProps) => {
           cols={20}
           value={bio || ''}
           onChange={(e) => setBio(e.target.value)}
-          required
         />
       </div>
-      <Button
-        className="float-right min-w-[100px]"
-        disabled={!isUpdate || loading}
-        type="submit"
-      >
-        {loading ? (
-          <span className="flex w-full justify-center">
-            <LoaderCircle className="h-4 w-4 animate-spin" />
-          </span>
-        ) : (
-          'Submit'
-        )}
-      </Button>
+      <div className="flex justify-end space-x-2 px-4">
+        <AlertDelete />
+        <Button
+          className="w-[200px] uppercase"
+          disabled={!fullName || !username || !isUpdate || loading}
+          type="submit"
+        >
+          {loading ? (
+            <span className="flex w-full justify-center">
+              <LoaderCircle className="h-4 w-4 animate-spin" />
+            </span>
+          ) : (
+            'Submit'
+          )}
+        </Button>
+      </div>
     </form>
   )
 }

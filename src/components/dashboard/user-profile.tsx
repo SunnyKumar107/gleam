@@ -40,8 +40,8 @@ const Profile = ({ user }: UserProps) => {
               className="h-full w-full object-cover"
               src={user.image ? user.image : '/images/user-avtar.png'}
               alt={user.username}
-              width={50}
-              height={50}
+              width={100}
+              height={100}
             />
           </div>
           <div className="flex w-56 max-w-[350px] justify-between  py-2 text-center sm:w-full md:w-[350px] md:py-8">

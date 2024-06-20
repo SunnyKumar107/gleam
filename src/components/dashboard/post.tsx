@@ -117,8 +117,8 @@ const Post = ({ post }: PostProps) => {
                 post.author.image ? post.author.image : '/images/user-avtar.png'
               }
               alt={'avatar'}
-              width={40}
-              height={40}
+              width={100}
+              height={100}
               className="min-h-8 object-cover"
             />
           </Link>

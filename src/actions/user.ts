@@ -144,10 +144,22 @@ export async function updateUser({
   }
 }
 
+export async function deleteUser({ userId }: { userId: string }) {
+  try {
+    await prisma.user.delete({
+      where: { id: userId }
+    })
+    return { success: true, status: 200, message: 'User deleted successfully' }
+  } catch (error) {
+    throw new Error('Failed to delete user')
+  }
+}
+
 export async function getFavorites(userId: string) {
   try {
     const favorites = await prisma.favoritePost.findMany({
-      where: { authorId: userId }, select: { id: true, post: true }
+      where: { authorId: userId },
+      select: { id: true, post: true }
     })
     return favorites
   } catch (error) {

@@ -73,8 +73,8 @@ const Comment = ({ comment }: CommentProps) => {
                 : '/images/user-avtar.png'
             }
             alt={comment.author.username}
-            width={40}
-            height={40}
+            width={100}
+            height={100}
           />
         </Link>
         <div className="flex max-w-[300px] flex-col justify-start md:max-w-[350px]">
