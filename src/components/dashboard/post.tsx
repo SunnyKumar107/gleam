@@ -19,6 +19,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
+import { formatDistance, subDays } from 'date-fns'
 
 type PostProps = {
   post: {
@@ -132,11 +133,13 @@ const Post = ({ post }: PostProps) => {
             >
               <h3 className="flex items-center text-sm font-semibold">
                 {post.author.username}
-                <Dot />
+                <Dot size={18} />
               </h3>
             </Link>
             <span className="flex items-center text-xs font-normal">
-              2d ago
+              {formatDistance(new Date(post.createdAt), new Date(), {
+                addSuffix: true
+              })}
             </span>
           </div>
         </div>

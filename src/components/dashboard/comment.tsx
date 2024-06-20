@@ -1,7 +1,8 @@
 'use client'
 
 import { likeComment, removeLikeComment } from '@/actions/comment'
-import { Heart } from 'lucide-react'
+import { formatDistance } from 'date-fns'
+import { Dot, Heart } from 'lucide-react'
 import { useSession } from 'next-auth/react'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -78,16 +79,25 @@ const Comment = ({ comment }: CommentProps) => {
           />
         </Link>
         <div className="flex max-w-[300px] flex-col justify-start md:max-w-[350px]">
-          <Link
-            href={
-              session?.user.username === comment.author.username
-                ? '/dashboard/profile'
-                : `/dashboard/user/${comment.author.username}`
-            }
-            className="text-xs font-medium"
-          >
-            {comment.author.username}
-          </Link>
+          <div className="flex items-center">
+            <Link
+              href={
+                session?.user.username === comment.author.username
+                  ? '/dashboard/profile'
+                  : `/dashboard/user/${comment.author.username}`
+              }
+            >
+              <h3 className="flex items-center text-sm font-medium">
+                {comment.author.username}
+                <Dot size={16} />
+              </h3>
+            </Link>
+            <span className="flex items-center text-xs font-normal">
+              {formatDistance(new Date(comment.createdAt), new Date(), {
+                addSuffix: true
+              })}
+            </span>
+          </div>
           <p className="text-sm">{comment.text}</p>
         </div>
       </div>
