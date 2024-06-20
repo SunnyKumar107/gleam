@@ -41,9 +41,9 @@ const AddComment = ({ postId }: { postId: string }) => {
   }
 
   return (
-    <div className="fixed bottom-0 z-20 flex w-full items-center justify-between space-x-2 border-t-[1px] border-gray-200 bg-white p-2 md:absolute md:border-t-0">
+    <div className="fixed bottom-0 z-20 flex w-full items-center justify-between space-x-2 border-t-[1px] border-foreground/20 bg-background p-2 md:absolute md:border-t-0">
       <div className="flex w-full items-center justify-between space-x-2 rounded-md">
-        <div className="h-7 w-7 min-w-7 overflow-hidden rounded-full">
+        <div className="h-7 w-7 min-w-7 overflow-hidden rounded-full bg-foreground/10">
           <Image
             className="min-h-7 object-cover"
             src={
@@ -66,7 +66,7 @@ const AddComment = ({ postId }: { postId: string }) => {
             cols={30}
             rows={1}
             ref={textAreaRef}
-            className="peer block h-full w-full resize-none px-1 py-2 text-sm placeholder:text-gray-500 focus:outline-none active:outline-none"
+            className="peer block h-full w-full resize-none bg-background px-1 py-2 text-sm placeholder:text-gray-500 focus:outline-none active:outline-none"
           />
         </div>
       </div>

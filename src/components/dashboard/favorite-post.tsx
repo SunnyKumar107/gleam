@@ -18,7 +18,7 @@ const Favorite = ({ post }: PostType) => {
     <Link
       href={`/dashboard/post/${post.post.id}`}
       key={post.id}
-      className="mb-1 h-[125px] w-[125px] overflow-hidden bg-gray-200 md:h-52 md:w-52 lg:h-80 lg:w-80"
+      className="mb-1 h-[125px] w-[125px] overflow-hidden bg-foreground/10 md:h-52 md:w-52 lg:h-80 lg:w-80"
     >
       <Image
         className="h-full w-full object-cover"

@@ -2,21 +2,20 @@
 
 import Link from 'next/link'
 import Logo from './gleam-logo'
-import { ArrowLeft, LoaderCircle, LogOut } from 'lucide-react'
-import { Button } from '@/components/ui/button'
+import { ArrowLeft } from 'lucide-react'
 import { logoutUser } from '@/actions/user'
-import { useFormStatus } from 'react-dom'
 import LogoutButton from './logout-button'
+import { ThemeToggle } from '@/components/theme-toggle'
 
 const Header = ({ type, name }: { type: string; name?: string }) => {
-  const { pending } = useFormStatus()
-
   return (
-    <div className="fixed top-0 z-10 flex h-14 w-screen items-center justify-between bg-white px-3 md:hidden">
+    <div className="fixed top-0 z-10 flex h-14 w-screen items-center justify-between bg-background px-3 md:hidden">
       {/* Home page */}
       {type === 'home' && <Logo />}
-      {/* This feature is not available yet
-       {type === 'home' && (
+      {type === 'home' && (
+        <div className="-mr-2.5 flex items-center space-x-2">
+          <ThemeToggle />
+          {/* This feature is not available yet
         <Link
           href={'/dashboard/messages'}
           key={'/dashboard/messages'}
@@ -25,8 +24,9 @@ const Header = ({ type, name }: { type: string; name?: string }) => {
           )}
         >
           <MessageCircleMore />
-        </Link>
-      )} */}
+        </Link> */}
+        </div>
+      )}
 
       {/* Your profile page */}
       {type === 'profile' && (

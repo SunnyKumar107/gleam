@@ -123,9 +123,9 @@ const EditProfile = ({ user }: UserProps) => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="relative mt-14 h-[calc(100vh-56px)] bg-background px-4 py-4 md:mt-0 md:px-8 md:py-6"
+      className="relative mt-14 h-[calc(100vh-56px)] bg-background px-4 py-4 md:mt-0 md:h-screen md:px-8 md:py-6"
     >
-      <div className="mb-4 flex items-center justify-between rounded-lg border bg-gray-50 p-4">
+      <div className="mb-4 flex items-center justify-between rounded-lg border bg-primary/10 p-4">
         <div className="relative">
           <div className="h-20 w-20 overflow-hidden rounded-full bg-foreground/10">
             <Image
@@ -140,12 +140,12 @@ const EditProfile = ({ user }: UserProps) => {
             <button
               onClick={handleDeleteImg}
               disabled={delLoading}
-              className="absolute right-[-8px] top-[-8px] rounded-full bg-slate-800 p-1 text-sm font-medium text-white hover:bg-slate-700"
+              className="absolute right-[-5px] top-[-5px] rounded-full bg-foreground p-1 text-sm font-medium text-background hover:bg-slate-700"
             >
               {delLoading ? (
-                <LoaderCircle size={17} className="h-4 w-4 animate-spin" />
+                <LoaderCircle size={15} className="h-4 w-4 animate-spin" />
               ) : (
-                <X size={17} />
+                <X size={15} />
               )}
             </button>
           )}

@@ -64,7 +64,7 @@ const Comment = ({ comment }: CommentProps) => {
               ? '/dashboard/profile'
               : `/dashboard/user/${comment.author.username}`
           }
-          className="h-9 w-9 overflow-hidden rounded-full bg-gray-200"
+          className="h-9 w-9 overflow-hidden rounded-full bg-foreground/10"
         >
           <Image
             className="min-h-9 object-cover"

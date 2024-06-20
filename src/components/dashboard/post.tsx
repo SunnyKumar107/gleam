@@ -100,7 +100,7 @@ const Post = ({ post }: PostProps) => {
   return (
     <div
       className={cn('flex w-screen flex-col pb-1 sm:w-[480px]', {
-        'border-b border-foreground/10': pathname !== '/dashboard'
+        'border-b border-foreground/20': pathname !== '/dashboard'
       })}
     >
       <div className="flex w-full items-center justify-between px-2 py-2 md:px-1">
@@ -167,7 +167,7 @@ const Post = ({ post }: PostProps) => {
         </div>
         <div>
           <button onClick={handleFavoritePost}>
-            {favoritePost ? <Star fill="#000" /> : <Star />}
+            {favoritePost ? <Star color="#ffd700" fill="#ffd700" /> : <Star />}
           </button>
         </div>
       </div>

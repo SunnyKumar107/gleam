@@ -128,7 +128,7 @@ export function CreatePost({ screen }: { screen?: string }) {
               onChange={(e) => setCaption(e.target.value)}
               cols={30}
               rows={2}
-              className="peer block h-full w-full resize-none p-2 text-base text-gray-700 outline-none placeholder:text-gray-500"
+              className="peer block h-full w-full resize-none p-2 text-base text-primary/90 outline-none placeholder:text-gray-500"
             />
           </div>
         </div>
