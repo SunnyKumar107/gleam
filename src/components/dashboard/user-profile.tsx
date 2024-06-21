@@ -64,7 +64,7 @@ const Profile = ({ user }: UserProps) => {
             {user.name}
           </h4>
           {user.bio && (
-            <p className="text-sm font-normal text-primary/80">{user.bio}</p>
+            <p className="text-sm font-normal text-primary/90">{user.bio}</p>
           )}
         </div>
 
@@ -72,7 +72,7 @@ const Profile = ({ user }: UserProps) => {
           {session?.user?.email === user?.email ? (
             <Link
               href="/dashboard/profile/edit"
-              className="w-full max-w-72 space-x-4 rounded-md bg-foreground/20 py-2 text-center text-sm font-medium text-foreground  hover:bg-foreground/30"
+              className="w-full max-w-72 space-x-4 rounded-md bg-foreground/10 py-2 text-center text-sm font-medium text-foreground  hover:bg-foreground/5"
             >
               Edit Profile
             </Link>
@@ -81,7 +81,7 @@ const Profile = ({ user }: UserProps) => {
               Follow
             </button>
           )}
-          <button className="w-full max-w-72 space-x-4 rounded-md bg-foreground/20 py-2 text-sm font-medium text-foreground  hover:bg-foreground/30">
+          <button className="w-full max-w-72 space-x-4 rounded-md bg-foreground/10 py-2 text-sm font-medium text-foreground  hover:bg-foreground/5">
             Share Profile
           </button>
         </div>

@@ -125,7 +125,7 @@ const EditProfile = ({ user }: UserProps) => {
       onSubmit={handleSubmit}
       className="relative mt-14 h-[calc(100vh-56px)] bg-background px-4 py-4 md:mt-0 md:h-screen md:px-8 md:py-6"
     >
-      <div className="mb-4 flex items-center justify-between rounded-lg border bg-primary/10 p-4">
+      <div className="mb-4 flex items-center justify-between rounded-lg border bg-foreground/5 p-4">
         <div className="relative">
           <div className="h-20 w-20 overflow-hidden rounded-full bg-foreground/10">
             <Image
@@ -207,7 +207,7 @@ const EditProfile = ({ user }: UserProps) => {
           onChange={(e) => setBio(e.target.value)}
         />
       </div>
-      <div className="flex justify-end space-x-2 px-4">
+      <div className="flex justify-end space-x-2">
         <AlertDelete />
         <Button
           className="w-[200px] uppercase"
