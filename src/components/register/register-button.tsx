@@ -11,7 +11,7 @@ export default function RegisterButton() {
     <Button type="submit" size="lg" disabled={pending} className="uppercase">
       {pending ? (
         <>
-          <LoaderCircle className="mb-0.5 h-4 w-4 animate-spin backdrop:mr-2" />
+          <LoaderCircle className="mb-0.5 mr-2 h-4 w-4 animate-spin" />
           Signing in
         </>
       ) : (

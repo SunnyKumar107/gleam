@@ -2,6 +2,7 @@
 
 import { prisma } from '@/lib/db'
 import { RegisterPostSchema } from '@/schema/post.schema'
+import { revalidatePath } from 'next/cache'
 
 export async function getPostTable() {
   const posts = await prisma.post.findMany({
@@ -67,6 +68,8 @@ export async function createPost({
         ...validatedPost.data
       }
     })
+    revalidatePath('/dashboard/profile')
+    revalidatePath('/dashboard')
     return {
       success: true,
       status: 200,
@@ -95,6 +98,8 @@ export async function likePost({
         authorId: authorId
       }
     })
+    revalidatePath('/dashboard')
+    revalidatePath('/dashboard/post/[postId]', 'page')
     return {
       success: true,
       message: 'like added',
@@ -116,6 +121,8 @@ export async function removeLikePost({ likeId }: { likeId: string }) {
         id: likeId
       }
     })
+    revalidatePath('/dashboard')
+    revalidatePath('/dashboard/post/[postId]', 'page')
     return {
       success: true,
       message: 'like removed',
@@ -156,6 +163,9 @@ export async function addFavoritePost({
         authorId: authorId
       }
     })
+    revalidatePath('/dashboard/favorites')
+    revalidatePath('/dashboard')
+    revalidatePath('/dashboard/post/[postId]', 'page')
     return {
       success: true
     }
@@ -178,6 +188,9 @@ export async function RemoveFavoritePost({
         id: favoritePostId
       }
     })
+    revalidatePath('/dashboard/favorites')
+    revalidatePath('/dashboard')
+    revalidatePath('/dashboard/post/[postId]', 'page')
     return {
       success: true
     }

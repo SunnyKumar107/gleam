@@ -78,7 +78,10 @@ const Profile = ({ user }: UserProps) => {
 
         <div className="flex w-full items-center justify-between space-x-4 p-2 md:justify-start">
           {session?.user?.email === user?.email ? (
-            <Link href="/dashboard/profile/edit" className="w-full max-w-72">
+            <Link
+              href="/dashboard/profile/edit"
+              className="w-full min-w-[185px] max-w-72"
+            >
               <Button variant="secondary" className="w-full">
                 Edit Profile
               </Button>

@@ -6,6 +6,7 @@ import { AuthError } from 'next-auth'
 import bcrypt from 'bcrypt'
 import { RegisterFormSchema } from '@/schema/user.schema'
 import { Prisma } from '@prisma/client'
+import { revalidatePath } from 'next/cache'
 
 export async function loginUser(
   _prevState: string | undefined,
@@ -140,6 +141,7 @@ export async function updateUser({
         image
       }
     })
+    revalidatePath('/dashboard/profile')
     return { success: true, status: 200, message: 'User updated successfully' }
   } catch (error) {
     throw new Error('Failed to update user')
@@ -171,6 +173,8 @@ export async function followUser({
         followerId
       }
     })
+    revalidatePath('/dashboard')
+    revalidatePath('/dashboard/user/[username]', 'page')
     return { success: true, status: 200, message: 'User followed successfully' }
   } catch (error) {
     throw new Error('Failed to follow user')
@@ -191,6 +195,8 @@ export async function unfollowUser({
         followerId
       }
     })
+    revalidatePath('/dashboard')
+    revalidatePath('/dashboard/user/[username]', 'page')
     return {
       success: true,
       status: 200,

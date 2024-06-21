@@ -2,6 +2,7 @@
 
 import { prisma } from '@/lib/db'
 import { RegisterCommentSchema } from '@/schema/comment.schema'
+import { revalidatePath } from 'next/cache'
 
 export async function getCommentsByPostId(postId: string) {
   try {
@@ -52,6 +53,8 @@ export async function addComment({
         ...validatedComment.data
       }
     })
+    revalidatePath('/dashboard')
+    revalidatePath('/dashboard/post/[postId]', 'page')
     return {
       success: true,
       status: 200,
@@ -69,7 +72,8 @@ export async function deleteComment({ commentId }: { commentId: string }) {
         id: commentId
       }
     })
-
+    revalidatePath('/dashboard')
+    revalidatePath('/dashboard/post/[postId]', 'page')
     return {
       success: true,
       status: 200,
@@ -94,6 +98,7 @@ export async function likeComment({
         authorId: authorId
       }
     })
+    revalidatePath('/dashboard/post/[postId]', 'page')
     return {
       success: true,
       message: 'like added',
@@ -115,6 +120,7 @@ export async function removeLikeComment({ likeId }: { likeId: string }) {
         id: likeId
       }
     })
+    revalidatePath('/dashboard/post/[postId]', 'page')
     return {
       success: true,
       message: 'like removed',
