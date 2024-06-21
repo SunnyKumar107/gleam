@@ -13,7 +13,7 @@ const Header = ({ type, name }: { type: string; name?: string }) => {
       {/* Home page */}
       {type === 'home' && <Logo />}
       {type === 'home' && (
-        <div className="-mr-2.5 flex items-center space-x-2">
+        <div className="-mr-2 flex items-center space-x-2">
           <ThemeToggle />
           {/* This feature is not available yet
         <Link

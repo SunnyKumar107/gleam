@@ -140,7 +140,7 @@ const EditProfile = ({ user }: UserProps) => {
             <button
               onClick={handleDeleteImg}
               disabled={delLoading}
-              className="absolute right-[-5px] top-[-5px] rounded-full bg-foreground p-1 text-sm font-medium text-background hover:bg-slate-700"
+              className="absolute right-[-5px] top-[-5px] rounded-full bg-foreground p-1 text-sm font-medium text-background hover:bg-foreground/90"
             >
               {delLoading ? (
                 <LoaderCircle size={15} className="h-4 w-4 animate-spin" />

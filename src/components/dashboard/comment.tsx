@@ -92,7 +92,7 @@ const Comment = ({ comment }: CommentProps) => {
                 <Dot size={16} />
               </h3>
             </Link>
-            <span className="flex items-center text-xs font-normal">
+            <span className="text-xs font-normal">
               {formatDistance(new Date(comment.createdAt), new Date(), {
                 addSuffix: true
               })}

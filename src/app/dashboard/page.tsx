@@ -10,12 +10,12 @@ export default async function Dashboard() {
   return (
     <>
       <Header type="home" />
-      <div className="relative mb-12 mt-14 flex flex-col flex-wrap gap-2 pt-2 sm:px-10 md:mb-0 md:mt-0 md:px-14 xl:px-24">
+      <div className="mb-12 mt-14 flex flex-col flex-wrap gap-2 pt-2 sm:px-10 md:mb-0 md:mt-0 md:px-14 xl:px-24">
         {posts.map((post) => (
           <Post key={post.id} post={post} />
         ))}
         <CreatePost screen="mobile" />
-        <div className="fixed bottom-8 right-12">
+        <div className="fixed bottom-8 right-12 hidden md:block">
           <ThemeToggle />
         </div>
       </div>

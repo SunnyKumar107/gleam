@@ -20,10 +20,10 @@ export default async function Favorites() {
           </div>
         ) : (
           <div className="flex flex-1 flex-col items-center justify-center gap-4">
-            <div className="rounded-full border-2 border-slate-900 p-4 text-4xl">
+            <div className="rounded-full border-2 border-primary/90 p-4 text-4xl">
               <Camera size={40} strokeWidth={1.5} />
             </div>
-            <div className="text-2xl font-medium text-slate-900">
+            <div className="text-2xl font-medium text-primary/90">
               No Favorites Yet
             </div>
           </div>

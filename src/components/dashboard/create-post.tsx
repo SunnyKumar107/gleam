@@ -67,7 +67,10 @@ export function CreatePost({ screen }: { screen?: string }) {
     <Dialog>
       <DialogTrigger asChild>
         {screen === 'mobile' ? (
-          <Button size={'icon'} className="fixed bottom-20 right-5 md:hidden">
+          <Button
+            size={'icon'}
+            className="fixed bottom-20 right-[30px] md:hidden"
+          >
             <Plus />
           </Button>
         ) : (
@@ -93,7 +96,7 @@ export function CreatePost({ screen }: { screen?: string }) {
               <button
                 onClick={handleDeleteImg}
                 disabled={delLoading}
-                className="absolute right-2 top-2 rounded-full bg-slate-800 p-1 text-sm font-medium text-white hover:bg-slate-700"
+                className="absolute right-2 top-2 rounded-full bg-foreground p-1 text-sm font-medium text-background hover:bg-foreground/90"
               >
                 {delLoading ? (
                   <LoaderCircle size={17} className="h-4 w-4 animate-spin" />
@@ -103,7 +106,7 @@ export function CreatePost({ screen }: { screen?: string }) {
               </button>
             </div>
           ) : (
-            <div className="flex h-56 w-full items-center justify-center border">
+            <div className="flex h-56 w-full items-center justify-center border border-foreground/20">
               <UploadButton
                 endpoint="imageUploader"
                 onClientUploadComplete={(res: any) => {
@@ -128,7 +131,7 @@ export function CreatePost({ screen }: { screen?: string }) {
               onChange={(e) => setCaption(e.target.value)}
               cols={30}
               rows={2}
-              className="peer block h-full w-full resize-none p-2 text-base text-primary/90 outline-none placeholder:text-gray-500"
+              className="peer block h-full w-full resize-none bg-background p-2 text-base text-primary/90 outline-none placeholder:text-gray-500"
             />
           </div>
         </div>

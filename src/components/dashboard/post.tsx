@@ -176,14 +176,12 @@ const Post = ({ post }: PostProps) => {
           {totalLikes} {totalLikes === 1 ? 'like' : 'likes'}
         </div>
       ) : null}
-      {post.caption && (
-        <div className="flex gap-2 px-2 text-sm sm:px-1">
-          <h3 className="flex items-center font-semibold">
-            {post.author.username}
-          </h3>{' '}
-          <span className="">{post.caption}</span>
-        </div>
-      )}
+      <div className="flex gap-2 px-2 text-sm sm:px-1">
+        <h3 className="flex items-center font-semibold">
+          {post.author.username}
+        </h3>{' '}
+        {post.caption && <span className="">{post.caption}</span>}
+      </div>
       {post.comments.length > 0 && (
         <Link
           href={`/dashboard/post/${post.id}`}

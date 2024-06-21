@@ -87,7 +87,7 @@ const Profile = ({ user }: UserProps) => {
         </div>
       </div>
       {user.posts.length ? (
-        <div className="grid w-full grid-cols-3 gap-1 p-1">
+        <div className="flex flex-wrap gap-1 p-1">
           {reversedPosts.map((post: PostType) => (
             <Link
               href={`/dashboard/post/${post.id}`}
@@ -95,7 +95,7 @@ const Profile = ({ user }: UserProps) => {
               className="mb-1 h-[125px] w-[125px] overflow-hidden bg-foreground/10 md:h-52 md:w-52 lg:h-80 lg:w-80"
             >
               <Image
-                className="h-full w-full object-cover"
+                className="h-full w-full object-cover hover:scale-105"
                 src={post.image}
                 alt={post.caption ? post.caption : 'Post Image'}
                 width={400}
@@ -106,10 +106,10 @@ const Profile = ({ user }: UserProps) => {
         </div>
       ) : (
         <div className="flex flex-1 flex-col items-center justify-center gap-4">
-          <div className="rounded-full border-2 border-slate-900 p-4 text-4xl">
+          <div className="rounded-full border-2 border-primary/90 p-4 text-4xl">
             <Camera size={40} strokeWidth={1.5} />
           </div>
-          <div className="text-2xl font-medium text-slate-900">
+          <div className="text-2xl font-medium text-primary/90">
             No Posts Yet
           </div>
         </div>
