@@ -130,6 +130,18 @@ export async function removeLikePost({ likeId }: { likeId: string }) {
   }
 }
 
+export async function getFavoritePosts(userId: string) {
+  try {
+    const favorites = await prisma.favoritePost.findMany({
+      where: { authorId: userId },
+      select: { id: true, post: true }
+    })
+    return favorites
+  } catch (error) {
+    throw new Error('Failed to fetch favorites')
+  }
+}
+
 export async function addFavoritePost({
   postId,
   authorId

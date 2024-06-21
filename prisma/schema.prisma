@@ -23,6 +23,8 @@ model User {
   comments     Comment[]
   commentLikes CommentLike[]
   favorites    FavoritePost[]
+  following    Follow[] @relation("Following")
+  followers    Follow[] @relation("Followers")
 }
 
 
@@ -33,7 +35,7 @@ model Post {
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
   author       User     @relation(fields: [authorId], references: [id])
-  authorId     String      
+  authorId     String   @unique   
   postLikes    PostLike[]
   favoritedBy  FavoritePost[]
   comments     Comment[]
@@ -42,9 +44,9 @@ model Post {
 model PostLike {
   id         String      @id @default(cuid())
   post       Post       @relation(fields: [postId], references: [id])
-  postId     String        
+  postId     String     @unique  
   author     User       @relation(fields: [authorId], references: [id])
-  authorId   String        
+  authorId   String     @unique   
   createdAt  DateTime   @default(now())
   updatedAt  DateTime   @updatedAt
 }
@@ -52,9 +54,9 @@ model PostLike {
 model FavoritePost {
   id         String      @id @default(cuid())
   post       Post       @relation(fields: [postId], references: [id])
-  postId     String        
+  postId     String     @unique   
   author     User       @relation(fields: [authorId], references: [id])
-  authorId   String        
+  authorId   String     @unique  
   createdAt  DateTime   @default(now())
   updatedAt  DateTime   @updatedAt
 }
@@ -65,18 +67,27 @@ model Comment {
   createdAt  DateTime   @default(now())
   updatedAt  DateTime   @updatedAt
   post       Post       @relation(fields: [postId], references: [id])
-  postId     String        
+  postId     String     
   author     User       @relation(fields: [authorId], references: [id])
   authorId   String        
   commentLikes CommentLike[]
 }
 
 model CommentLike {
-  id         String      @id @default(cuid())
+  id         String     @id @default(cuid())
   comment    Comment    @relation(fields: [commentId], references: [id])
-  commentId  String        
+  commentId  String     @unique  
   author     User       @relation(fields: [authorId], references: [id])
-  authorId   String        
+  authorId   String     @unique   
   createdAt  DateTime   @default(now())
   updatedAt  DateTime   @updatedAt
+}
+
+model Follow {
+  id           String     @id @default(cuid()) 
+  follower     User       @relation("Following", fields: [followerId], references: [id])
+  followerId   String     @unique
+  following    User       @relation("Followers", fields: [followingId], references: [id])   
+  followingId  String     @unique 
+  createdAt    DateTime   @default(now())
 }

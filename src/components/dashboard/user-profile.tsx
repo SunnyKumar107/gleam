@@ -4,6 +4,8 @@ import { Camera } from 'lucide-react'
 import { useSession } from 'next-auth/react'
 import Image from 'next/image'
 import Link from 'next/link'
+import FollowButton from './follow-button'
+import { Button } from '../ui/button'
 
 type PostType = {
   id: string
@@ -21,6 +23,13 @@ type UserProps = {
     bio: string | null
     image: string | null
     posts: PostType[]
+    following: {
+      id: string
+    }[]
+    followers: {
+      id: string
+      followerId: string
+    }[]
   } | null
 }
 
@@ -28,7 +37,6 @@ const Profile = ({ user }: UserProps) => {
   const { data: session } = useSession()
 
   if (!user) return
-
   const reversedPosts = user.posts.reverse()
 
   return (
@@ -50,11 +58,11 @@ const Profile = ({ user }: UserProps) => {
               <p className="text-sm text-primary/90">posts</p>
             </div>
             <div>
-              <h4 className="text-lg font-medium">0</h4>
+              <h4 className="text-lg font-medium">{user.followers.length}</h4>
               <p className="text-sm text-primary/90">followers</p>
             </div>
             <div>
-              <h4 className="text-lg font-medium">0</h4>
+              <h4 className="text-lg font-medium">{user.following.length}</h4>
               <p className="text-sm text-primary/90">following</p>
             </div>
           </div>
@@ -70,20 +78,17 @@ const Profile = ({ user }: UserProps) => {
 
         <div className="flex w-full items-center justify-between space-x-4 p-2 md:justify-start">
           {session?.user?.email === user?.email ? (
-            <Link
-              href="/dashboard/profile/edit"
-              className="w-full max-w-72 space-x-4 rounded-md bg-foreground/10 py-2 text-center text-sm font-medium text-foreground  hover:bg-foreground/5"
-            >
-              Edit Profile
+            <Link href="/dashboard/profile/edit" className="w-full max-w-72">
+              <Button variant="secondary" className="w-full">
+                Edit Profile
+              </Button>
             </Link>
           ) : (
-            <button className="w-full max-w-72 space-x-4 rounded-md bg-sky-600 py-2 text-sm font-medium text-white  hover:bg-sky-500">
-              Follow
-            </button>
+            <FollowButton followers={user.followers} userId={user.id} />
           )}
-          <button className="w-full max-w-72 space-x-4 rounded-md bg-foreground/10 py-2 text-sm font-medium text-foreground  hover:bg-foreground/5">
+          <Button variant="secondary" className="w-full max-w-72">
             Share Profile
-          </button>
+          </Button>
         </div>
       </div>
       {user.posts.length ? (

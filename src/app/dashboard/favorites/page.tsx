@@ -1,4 +1,4 @@
-import { getFavorites } from '@/actions/user'
+import { getFavoritePosts } from '@/actions/post'
 import { auth } from '@/auth'
 import Header from '@/components/dashboard/common/header'
 import Favorite from '@/components/dashboard/favorite-post'
@@ -6,7 +6,7 @@ import { Camera } from 'lucide-react'
 
 export default async function Favorites() {
   const session = await auth()
-  const favorites = await getFavorites(session?.user.id as string)
+  const favorites = await getFavoritePosts(session?.user.id as string)
 
   return (
     <>

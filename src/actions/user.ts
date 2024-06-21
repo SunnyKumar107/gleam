@@ -106,7 +106,9 @@ export async function getUserByUsername(username: string) {
         bio: true,
         image: true,
         posts: true,
-        favorites: true
+        favorites: true,
+        followers: true,
+        following: true
       }
     })
     return user
@@ -155,14 +157,46 @@ export async function deleteUser({ userId }: { userId: string }) {
   }
 }
 
-export async function getFavorites(userId: string) {
+export async function followUser({
+  followingId,
+  followerId
+}: {
+  followingId: string
+  followerId: string
+}) {
   try {
-    const favorites = await prisma.favoritePost.findMany({
-      where: { authorId: userId },
-      select: { id: true, post: true }
+    await prisma.follow.create({
+      data: {
+        followingId,
+        followerId
+      }
     })
-    return favorites
+    return { success: true, status: 200, message: 'User followed successfully' }
   } catch (error) {
-    throw new Error('Failed to fetch favorites')
+    throw new Error('Failed to follow user')
+  }
+}
+
+export async function unfollowUser({
+  followingId,
+  followerId
+}: {
+  followingId: string
+  followerId: string
+}) {
+  try {
+    await prisma.follow.deleteMany({
+      where: {
+        followingId,
+        followerId
+      }
+    })
+    return {
+      success: true,
+      status: 200,
+      message: 'User unfollowed successfully'
+    }
+  } catch (error) {
+    throw new Error('Failed to unfollow user')
   }
 }

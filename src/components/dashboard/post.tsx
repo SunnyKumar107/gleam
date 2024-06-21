@@ -177,10 +177,10 @@ const Post = ({ post }: PostProps) => {
         </div>
       ) : null}
       <div className="flex gap-2 px-2 text-sm sm:px-1">
-        <h3 className="flex items-center font-semibold">
+        <h3 className="flex items-start font-semibold">
           {post.author.username}
         </h3>{' '}
-        {post.caption && <span className="">{post.caption}</span>}
+        {post.caption && <span className="max-w-4/5">{post.caption}</span>}
       </div>
       {post.comments.length > 0 && (
         <Link
