@@ -15,6 +15,9 @@ export async function getPostTable() {
       postLikes: true,
       comments: true,
       favoritedBy: true
+    },
+    orderBy: {
+      createdAt: 'desc'
     }
   })
   return posts
@@ -141,7 +144,10 @@ export async function getFavoritePosts(userId: string) {
   try {
     const favorites = await prisma.favoritePost.findMany({
       where: { authorId: userId },
-      select: { id: true, post: true }
+      select: { id: true, post: true },
+      orderBy: {
+        createdAt: 'desc'
+      }
     })
     return favorites
   } catch (error) {

@@ -80,7 +80,7 @@ const Profile = ({ user }: UserProps) => {
           {session?.user?.email === user?.email ? (
             <Link
               href="/dashboard/profile/edit"
-              className="w-full min-w-[185px] max-w-72"
+              className="w-full min-w-[183px] max-w-72"
             >
               <Button variant="secondary" className="w-full">
                 Edit Profile

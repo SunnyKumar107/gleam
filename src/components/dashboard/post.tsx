@@ -176,16 +176,16 @@ const Post = ({ post }: PostProps) => {
           {totalLikes} {totalLikes === 1 ? 'like' : 'likes'}
         </div>
       ) : null}
-      <div className="flex gap-2 px-2 text-sm sm:px-1">
-        <h3 className="flex items-start font-semibold">
-          {post.author.username}
-        </h3>{' '}
-        {post.caption && <span className="max-w-4/5">{post.caption}</span>}
+      <div className="px-2 text-sm sm:px-1">
+        <p className="max-w-[350px]">
+          <span className="mr-2 font-semibold">{post.author.username}</span>
+          {post.caption}
+        </p>
       </div>
       {post.comments.length > 0 && (
         <Link
           href={`/dashboard/post/${post.id}`}
-          className={`cursor-pointer px-2 text-sm font-normal text-foreground/70 md:px-1 ${
+          className={`mt-1 cursor-pointer px-2 text-sm font-normal text-foreground/70 md:px-1 ${
             pathname === `/dashboard/post/${post.id}` && 'hidden'
           }`}
         >

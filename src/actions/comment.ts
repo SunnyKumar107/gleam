@@ -17,6 +17,9 @@ export async function getCommentsByPostId(postId: string) {
         updatedAt: true,
         author: true,
         commentLikes: true
+      },
+      orderBy: {
+        createdAt: 'desc'
       }
     })
     return comments

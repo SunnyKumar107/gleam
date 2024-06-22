@@ -86,8 +86,8 @@ model CommentLike {
 model Follow {
   id           String     @id @default(cuid()) 
   follower     User       @relation("Following", fields: [followerId], references: [id])
-  followerId   String     @unique
+  followerId   String     
   following    User       @relation("Followers", fields: [followingId], references: [id])   
-  followingId  String     @unique 
+  followingId  String      
   createdAt    DateTime   @default(now())
 }

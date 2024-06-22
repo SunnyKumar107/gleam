@@ -9,7 +9,7 @@ import { ThemeToggle } from '@/components/theme-toggle'
 
 const Header = ({ type, name }: { type: string; name?: string }) => {
   return (
-    <div className="fixed top-0 z-10 flex h-14 w-screen items-center justify-between bg-background px-3 md:hidden">
+    <div className="fixed top-0 z-10 flex h-14 w-screen items-center justify-between border-b border-foreground/30 bg-background px-3 md:hidden ">
       {/* Home page */}
       {type === 'home' && <Logo />}
       {type === 'home' && (
