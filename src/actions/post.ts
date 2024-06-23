@@ -87,6 +87,21 @@ export async function createPost({
   }
 }
 
+export async function getLikesByPostId(postId: string) {
+  try {
+    const likes = await prisma.postLike.findMany({
+      where: { postId },
+      select: { author: true },
+      orderBy: {
+        createdAt: 'desc'
+      }
+    })
+    return likes
+  } catch (error) {
+    throw new Error('Failed to get likes')
+  }
+}
+
 export async function likePost({
   postId,
   authorId

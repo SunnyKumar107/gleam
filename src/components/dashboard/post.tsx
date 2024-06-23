@@ -172,9 +172,12 @@ const Post = ({ post }: PostProps) => {
         </div>
       </div>
       {totalLikes ? (
-        <div className="mb-1 px-2 text-sm font-medium sm:px-1">
+        <Link
+          href={`/dashboard/post/${post.id}/likes`}
+          className="mb-1 px-2 text-sm font-medium sm:px-1"
+        >
           {totalLikes} {totalLikes === 1 ? 'like' : 'likes'}
-        </div>
+        </Link>
       ) : null}
       <div className="px-2 text-sm sm:px-1">
         <p className="max-w-[350px]">
