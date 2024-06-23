@@ -118,6 +118,19 @@ export async function getUserByUsername(username: string) {
   }
 }
 
+export async function getUserTable(userId: string) {
+  try {
+    const users = await prisma.user.findMany({
+      where: {
+        id: { not: userId }
+      }
+    })
+    return users
+  } catch (error) {
+    throw new Error('Failed to fetch all users')
+  }
+}
+
 export async function updateUser({
   id,
   name,
