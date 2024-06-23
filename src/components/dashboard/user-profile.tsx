@@ -6,6 +6,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { Button } from '../ui/button'
 import FollowButton from './follow-button'
+import PostImage from './post-image'
 
 type PostType = {
   id: string
@@ -97,19 +98,7 @@ const Profile = ({ user }: UserProps) => {
       {user.posts.length ? (
         <div className="flex flex-wrap gap-1 p-1">
           {reversedPosts.map((post: PostType) => (
-            <Link
-              href={`/dashboard/post/${post.id}`}
-              key={post.id}
-              className="mb-1 h-[125px] w-[125px] overflow-hidden bg-foreground/10 md:h-52 md:w-52 lg:h-80 lg:w-80"
-            >
-              <Image
-                className="h-full w-full object-cover hover:scale-105"
-                src={post.image}
-                alt={post.caption ? post.caption : 'Post Image'}
-                width={400}
-                height={500}
-              />
-            </Link>
+            <PostImage key={post.id} post={post} />
           ))}
         </div>
       ) : (

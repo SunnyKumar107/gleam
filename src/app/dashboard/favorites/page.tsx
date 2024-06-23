@@ -1,7 +1,7 @@
 import { getFavoritePosts } from '@/actions/post'
 import { auth } from '@/auth'
 import Header from '@/components/dashboard/common/header'
-import Favorite from '@/components/dashboard/favorite-post'
+import PostImage from '@/components/dashboard/post-image'
 import { Camera } from 'lucide-react'
 
 export default async function Favorites() {
@@ -18,7 +18,7 @@ export default async function Favorites() {
         {favorites.length ? (
           <div className="flex flex-wrap gap-x-1 p-1">
             {favorites.map((post) => (
-              <Favorite key={post.id} post={post} />
+              <PostImage key={post.id} post={post.post} />
             ))}
           </div>
         ) : (

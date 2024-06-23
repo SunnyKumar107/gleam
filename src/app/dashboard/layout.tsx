@@ -13,7 +13,7 @@ export default async function RootLayout({ children }: RootLayoutProps) {
     <SessionProvider session={session}>
       <main>
         <SideNav />
-        <div className="bg-background md:ml-64 md:p-2">{children}</div>
+        <div className="bg-background md:ml-64">{children}</div>
       </main>
     </SessionProvider>
   )

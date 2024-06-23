@@ -14,13 +14,13 @@ const Header = ({ type, name }: { type: string; name?: string }) => {
 
   if (type === 'followers' || type === 'following') {
     return (
-      <div className="fixed top-0 z-10 flex h-14 w-screen items-center justify-between border-b border-foreground/30 bg-background md:hidden">
+      <div className="fixed top-0 z-10 flex h-14 w-screen items-center justify-between border-b border-foreground/10 bg-background md:w-[calc(100vw-256px)]">
         <Link
           href={`/dashboard/user/${name}/followers`}
           className={cn(
-            'flex h-full w-full items-center justify-center border text-xl font-medium',
+            'flex h-full w-full items-center justify-center border-b-2 border-background text-lg font-medium md:text-xl',
             {
-              'bg-primary-foreground font-semibold text-foreground':
+              'border-primary bg-primary-foreground font-semibold text-foreground':
                 pathname === `/dashboard/user/${name}/followers`
             }
           )}
@@ -30,9 +30,9 @@ const Header = ({ type, name }: { type: string; name?: string }) => {
         <Link
           href={`/dashboard/user/${name}/following`}
           className={cn(
-            'flex h-full w-full items-center justify-center text-xl font-medium',
+            'flex h-full w-full items-center justify-center border-b-2 border-background text-lg font-medium md:text-xl',
             {
-              'bg-primary-foreground font-semibold text-foreground':
+              'border-primary bg-primary-foreground font-semibold text-foreground':
                 pathname === `/dashboard/user/${name}/following`
             }
           )}
