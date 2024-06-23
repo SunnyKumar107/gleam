@@ -10,10 +10,13 @@ export default async function Favorites() {
 
   return (
     <>
+      <h1 className="mb-4 mt-4 hidden px-4 text-3xl font-medium text-primary/90 md:block">
+        favorites
+      </h1>
       <Header type="favorites" />
-      <div className="mb-12 mt-14 flex h-[calc(100vh-100px)] flex-col justify-start md:mb-0 md:mt-0 md:h-[calc(100vh)] md:px-4 md:py-8 lg:px-8">
+      <div className="mb-12 mt-14 flex h-[calc(100vh-100px)] flex-col justify-start md:mb-0 md:mt-0 md:h-[calc(100vh)] md:px-4 md:py-4">
         {favorites.length ? (
-          <div className="flex flex-wrap gap-x-1 px-2 py-1">
+          <div className="flex flex-wrap gap-x-1 p-1">
             {favorites.map((post) => (
               <Favorite key={post.id} post={post} />
             ))}

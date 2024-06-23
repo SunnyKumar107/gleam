@@ -5,6 +5,11 @@ import { Button } from '../ui/button'
 import { useSession } from 'next-auth/react'
 import { followUser, unfollowUser } from '@/actions/user'
 
+type followingProps = {
+  id: string
+  followingId: string
+}[]
+
 type followersProps = {
   id: string
   followerId: string
@@ -12,23 +17,31 @@ type followersProps = {
 
 const FollowButton = ({
   followers,
+  following,
   userId
 }: {
-  followers: followersProps
+  followers?: followersProps
+  following?: followingProps
   userId: string
 }) => {
   const [isFollow, setIsFollow] = useState(false)
   const { data: session } = useSession()
 
-  const isUserFollow = followers.find(
-    (follower) => follower.followerId === session?.user.id
-  )
+  const isUserFollow = () => {
+    if (following) {
+      return following.find((user) => user.followingId === userId)
+    }
+
+    if (followers) {
+      return followers.find((user) => user.followerId === session?.user.id)
+    }
+  }
 
   useEffect(() => {
-    if (isUserFollow) {
+    if (isUserFollow()) {
       setIsFollow(true)
     }
-  }, [])
+  }, [isUserFollow])
 
   const handleFollow = async () => {
     setIsFollow(!isFollow)

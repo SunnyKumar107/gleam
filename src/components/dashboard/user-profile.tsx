@@ -4,8 +4,8 @@ import { Camera } from 'lucide-react'
 import { useSession } from 'next-auth/react'
 import Image from 'next/image'
 import Link from 'next/link'
-import FollowButton from './follow-button'
 import { Button } from '../ui/button'
+import FollowButton from './follow-button'
 
 type PostType = {
   id: string
@@ -57,14 +57,14 @@ const Profile = ({ user }: UserProps) => {
               <h4 className="text-lg font-medium">{user.posts.length}</h4>
               <p className="text-sm text-primary/90">posts</p>
             </div>
-            <div>
+            <Link href={`/dashboard/user/${user.username}/followers`}>
               <h4 className="text-lg font-medium">{user.followers.length}</h4>
               <p className="text-sm text-primary/90">followers</p>
-            </div>
-            <div>
+            </Link>
+            <Link href={`/dashboard/user/${user.username}/following`}>
               <h4 className="text-lg font-medium">{user.following.length}</h4>
               <p className="text-sm text-primary/90">following</p>
-            </div>
+            </Link>
           </div>
         </div>
         <div className="px-4 py-2 md:px-8">
@@ -77,7 +77,7 @@ const Profile = ({ user }: UserProps) => {
         </div>
 
         <div className="flex w-full items-center justify-between space-x-4 p-2 md:justify-start">
-          {session?.user?.email === user?.email ? (
+          {session?.user?.email === user.email ? (
             <Link
               href="/dashboard/profile/edit"
               className="w-full min-w-[183px] max-w-72"

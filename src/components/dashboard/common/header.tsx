@@ -6,8 +6,43 @@ import { ArrowLeft } from 'lucide-react'
 import { logoutUser } from '@/actions/user'
 import LogoutButton from './logout-button'
 import { ThemeToggle } from '@/components/theme-toggle'
+import { usePathname } from 'next/navigation'
+import { cn } from '@/lib/utils'
 
 const Header = ({ type, name }: { type: string; name?: string }) => {
+  const pathname = usePathname()
+
+  if (type === 'followers' || type === 'following') {
+    return (
+      <div className="fixed top-0 z-10 flex h-14 w-screen items-center justify-between border-b border-foreground/30 bg-background md:hidden">
+        <Link
+          href={`/dashboard/user/${name}/followers`}
+          className={cn(
+            'flex h-full w-full items-center justify-center border text-xl font-medium',
+            {
+              'bg-primary-foreground font-semibold text-foreground':
+                pathname === `/dashboard/user/${name}/followers`
+            }
+          )}
+        >
+          followers
+        </Link>
+        <Link
+          href={`/dashboard/user/${name}/following`}
+          className={cn(
+            'flex h-full w-full items-center justify-center text-xl font-medium',
+            {
+              'bg-primary-foreground font-semibold text-foreground':
+                pathname === `/dashboard/user/${name}/following`
+            }
+          )}
+        >
+          following
+        </Link>
+      </div>
+    )
+  }
+
   return (
     <div className="fixed top-0 z-10 flex h-14 w-screen items-center justify-between border-b border-foreground/30 bg-background px-3 md:hidden ">
       {/* Home page */}
@@ -93,6 +128,13 @@ const Header = ({ type, name }: { type: string; name?: string }) => {
             <ArrowLeft />
           </Link>
           <h2 className="text-xl font-medium">Edit</h2>
+        </div>
+      )}
+
+      {/* Default */}
+      {type === 'default' && (
+        <div className="">
+          <h2 className="text-xl font-medium">{name}</h2>
         </div>
       )}
     </div>

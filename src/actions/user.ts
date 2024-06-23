@@ -159,6 +159,36 @@ export async function deleteUser({ userId }: { userId: string }) {
   }
 }
 
+export const getFollowersByUsername = async (username: string) => {
+  try {
+    const followers = await prisma.follow.findMany({
+      where: { following: { username } },
+      select: { follower: true },
+      orderBy: {
+        createdAt: 'desc'
+      }
+    })
+    return followers
+  } catch (error) {
+    throw new Error('Failed to fetch followers')
+  }
+}
+
+export const getFollowingByUsername = async (username: string) => {
+  try {
+    const following = await prisma.follow.findMany({
+      where: { follower: { username } },
+      select: { following: true },
+      orderBy: {
+        createdAt: 'desc'
+      }
+    })
+    return following
+  } catch (error) {
+    throw new Error('Failed to fetch following')
+  }
+}
+
 export async function followUser({
   followingId,
   followerId
