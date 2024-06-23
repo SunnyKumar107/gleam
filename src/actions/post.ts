@@ -87,6 +87,33 @@ export async function createPost({
   }
 }
 
+export async function deletePost({
+  postId,
+  authorId
+}: {
+  postId: string
+  authorId: string
+}) {
+  try {
+    await prisma.post.deleteMany({
+      where: {
+        id: postId,
+        authorId
+      }
+    })
+    revalidatePath('/dashboard')
+    revalidatePath('/dashboard/post/[postId]', 'page')
+    return {
+      success: true
+    }
+  } catch (error) {
+    return {
+      success: false,
+      statuscode: 500
+    }
+  }
+}
+
 export async function getLikesByPostId(postId: string) {
   try {
     const likes = await prisma.postLike.findMany({

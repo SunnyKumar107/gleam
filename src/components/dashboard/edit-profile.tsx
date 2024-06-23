@@ -86,7 +86,6 @@ const EditProfile = ({ user }: UserProps) => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    console.log('imgUrl', imgUrl)
     setLoading(true)
     if (isUpdate) {
       const res = await updateUser({

@@ -20,6 +20,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { formatDistance, subDays } from 'date-fns'
+import { PostMenu } from './post-menu'
 
 type PostProps = {
   post: {
@@ -28,6 +29,7 @@ type PostProps = {
     caption: string | null
     createdAt: Date
     author: {
+      id: string
       username: string
       image: string | null
     }
@@ -143,8 +145,8 @@ const Post = ({ post }: PostProps) => {
             </span>
           </div>
         </div>
-        <div>
-          <EllipsisVertical size={18} />
+        <div className="-mb-2">
+          <PostMenu postId={post.id} userId={post.author.id} />
         </div>
       </div>
       <div className="flex max-h-[500px] w-full items-center overflow-hidden bg-foreground/10">
