@@ -106,7 +106,11 @@ export async function getUserByUsername(username: string) {
         email: true,
         bio: true,
         image: true,
-        posts: true,
+        posts: {
+          orderBy: {
+            createdAt: 'desc'
+          }
+        },
         favorites: true,
         followers: true,
         following: true

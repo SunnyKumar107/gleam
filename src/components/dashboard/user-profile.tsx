@@ -38,7 +38,6 @@ const Profile = ({ user }: UserProps) => {
   const { data: session } = useSession()
 
   if (!user) return
-  const reversedPosts = user.posts.reverse()
 
   return (
     <div className="mb-12 mt-14 flex h-[calc(100vh-100px)] flex-col justify-start py-4 md:mb-0 md:mt-0 md:h-[calc(100vh)] md:px-4 md:py-8 lg:px-16">
@@ -97,7 +96,7 @@ const Profile = ({ user }: UserProps) => {
       </div>
       {user.posts.length ? (
         <div className="flex flex-wrap gap-1 p-1">
-          {reversedPosts.map((post: PostType) => (
+          {user.posts.map((post: PostType) => (
             <PostImage key={post.id} post={post} />
           ))}
         </div>
