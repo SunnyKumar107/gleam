@@ -10,10 +10,8 @@ import {
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu'
 import { EllipsisVertical } from 'lucide-react'
-import { deletePost } from '@/actions/post'
 import { useSession } from 'next-auth/react'
-import { useRouter } from 'next/navigation'
-import { useToast } from '../ui/use-toast'
+import { PostDeleteAlert } from './post-delete-alert'
 
 export function PostMenu({
   postId,
@@ -23,26 +21,6 @@ export function PostMenu({
   userId: string
 }) {
   const { data: session } = useSession()
-  const router = useRouter()
-  const { toast } = useToast()
-
-  const handleDeletePost = async () => {
-    const res = await deletePost({ postId, authorId: session?.user.id! })
-
-    if (res.success) {
-      toast({
-        title: 'Post deleted successfully'
-      })
-      router.replace('/dashboards/profile')
-      return
-    }
-
-    toast({
-      variant: 'destructive',
-      title: 'Something went wrong',
-      description: 'Please try again'
-    })
-  }
 
   return (
     <DropdownMenu>
@@ -59,7 +37,7 @@ export function PostMenu({
       <DropdownMenuContent align="end">
         <DropdownMenuItem>Download</DropdownMenuItem>
         {session?.user.id === userId && (
-          <DropdownMenuItem onClick={handleDeletePost}>Delete</DropdownMenuItem>
+          <PostDeleteAlert postId={postId} authorId={session?.user.id} />
         )}
       </DropdownMenuContent>
     </DropdownMenu>

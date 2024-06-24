@@ -172,7 +172,7 @@ export async function deleteUser({ userId }: { userId: string }) {
     })
     return { success: true, status: 200, message: 'User deleted successfully' }
   } catch (error) {
-    throw new Error('Failed to delete user')
+    return { success: false, status: 500, message: 'Failed to delete user' }
   }
 }
 

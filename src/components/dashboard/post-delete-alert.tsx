@@ -1,6 +1,5 @@
 'use client'
 
-import { deleteUser, logoutUser } from '@/actions/user'
 import {
   AlertDialog,
   AlertDialogAction,
@@ -12,31 +11,39 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger
 } from '@/components/ui/alert-dialog'
-import { Button } from '@/components/ui/button'
-import { useToast } from '@/components/ui/use-toast'
-import { LoaderCircle, Trash2 } from 'lucide-react'
-import { useSession } from 'next-auth/react'
+import { deletePost } from '@/actions/post'
+import { useToast } from '../ui/use-toast'
+import { useRouter } from 'next/navigation'
 import { useState } from 'react'
+import { LoaderCircle } from 'lucide-react'
 
-export function AlertDelete() {
-  const [pending, setPending] = useState(false)
-  const { data: session } = useSession()
+export function PostDeleteAlert({
+  postId,
+  authorId
+}: {
+  postId: string
+  authorId: string
+}) {
+  const router = useRouter()
   const { toast } = useToast()
+  const [pending, setPending] = useState(false)
 
-  const handleDeleteAccount = async () => {
+  const handleDeletePost = async () => {
     setPending(true)
-    const res = await deleteUser({ userId: session?.user.id! })
-    if (res.success) {
-      logoutUser()
-      setPending(false)
-      toast({
-        title: 'Account deleted successfully!'
-      })
-    }
+    const res = await deletePost({ postId, authorId: authorId })
+
     setPending(false)
+    if (res.success) {
+      toast({
+        title: 'Post deleted successfully'
+      })
+      router.back()
+      return
+    }
+
     toast({
       variant: 'destructive',
-      title: 'Something went wrong!',
+      title: 'Something went wrong',
       description: 'Please try again'
     })
   }
@@ -44,34 +51,25 @@ export function AlertDelete() {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <Button
-          variant="secondary"
-          disabled={pending}
-          className="w-[200px] uppercase text-red-600"
-        >
+        <button className="h-full w-full px-2 text-start">
           {pending ? (
-            <>
-              <LoaderCircle className="mb-0.5 mr-2 h-4 w-4 animate-spin" />
-              Deleting Account
-            </>
+            <LoaderCircle size={16} className="h-4 w-4 animate-spin" />
           ) : (
-            <>
-              <Trash2 className="mr-2 h-4 w-4" /> Delete Account
-            </>
+            'Delete'
           )}
-        </Button>
+        </button>
       </AlertDialogTrigger>
       <AlertDialogContent className="max-w-[360px] sm:max-w-[425px]">
         <AlertDialogHeader>
           <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
           <AlertDialogDescription>
             This action cannot be undone. This will permanently delete your
-            account and remove your data from our servers.
+            post.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <AlertDialogAction onClick={handleDeleteAccount}>
+          <AlertDialogAction onClick={handleDeletePost}>
             Delete
           </AlertDialogAction>
         </AlertDialogFooter>
