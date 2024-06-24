@@ -15,9 +15,9 @@ export default async function Following({
   const user = await getUserByUsername(session?.user.username as string)
 
   return (
-    <div className="h-screen">
+    <>
       <Header type="following" name={params.username} />
-      <div className="mb-12 mt-14 flex flex-wrap justify-between p-2 md:mb-0 md:justify-start md:gap-4 md:p-4">
+      <div className="mb-12 mt-14 flex h-[calc(100vh-100px)] flex-wrap justify-between gap-4 p-2 md:mb-0 md:justify-start md:p-4">
         {followingUsers.map((following) => (
           <User
             user={following.following}
@@ -26,6 +26,6 @@ export default async function Following({
           />
         ))}
       </div>
-    </div>
+    </>
   )
 }

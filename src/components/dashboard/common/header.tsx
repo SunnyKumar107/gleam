@@ -20,7 +20,7 @@ const Header = ({ type, name }: { type: string; name?: string }) => {
           className={cn(
             'flex h-full w-full items-center justify-center border-b-2 border-background text-lg font-medium md:text-xl',
             {
-              'border-primary bg-primary-foreground font-semibold text-foreground':
+              'border-primary md:bg-secondary font-semibold text-foreground':
                 pathname === `/dashboard/user/${name}/followers`
             }
           )}
@@ -32,7 +32,7 @@ const Header = ({ type, name }: { type: string; name?: string }) => {
           className={cn(
             'flex h-full w-full items-center justify-center border-b-2 border-background text-lg font-medium md:text-xl',
             {
-              'border-primary bg-primary-foreground font-semibold text-foreground':
+              'border-primary md:bg-secondary font-semibold text-foreground':
                 pathname === `/dashboard/user/${name}/following`
             }
           )}

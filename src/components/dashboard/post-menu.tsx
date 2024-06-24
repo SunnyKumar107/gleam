@@ -50,7 +50,7 @@ export function PostMenu({
         <Button
           variant="ghost"
           size="icon"
-          className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all hover:bg-background"
+          className="z-0 h-[1.2rem] w-[1.2rem] hover:bg-background"
         >
           <EllipsisVertical size={18} />
           <span className="sr-only">Post menu</span>
