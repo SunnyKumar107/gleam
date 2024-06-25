@@ -41,7 +41,7 @@ const FollowButton = ({
     if (isUserFollow()) {
       setIsFollow(true)
     }
-  }, [isUserFollow])
+  }, [session])
 
   const handleFollow = async () => {
     setIsFollow(!isFollow)

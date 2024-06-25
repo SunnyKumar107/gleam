@@ -30,7 +30,7 @@ const EditProfile = ({ user }: UserProps) => {
   const [msg, setMsg] = useState('')
   const [loading, setLoading] = useState(false)
   const { toast } = useToast()
-  const { update } = useSession()
+  const { data: session, update } = useSession()
   const router = useRouter()
 
   useEffect(() => {
@@ -97,7 +97,7 @@ const EditProfile = ({ user }: UserProps) => {
       })
       if (res.success) {
         update({
-          ...user,
+          ...session!.user,
           name: fullName,
           username: uniqueUsername,
           bio: bio,

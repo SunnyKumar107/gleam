@@ -46,9 +46,10 @@ model PostLike {
   post       Post       @relation(fields: [postId], references: [id], onDelete: Cascade)
   postId     String     
   author     User       @relation(fields: [authorId], references: [id], onDelete: Cascade)
-  authorId   String     @unique
+  authorId   String    
   createdAt  DateTime   @default(now())
   updatedAt  DateTime   @updatedAt
+  @@unique([authorId, postId])
 }
 
 model FavoritePost {
@@ -59,6 +60,7 @@ model FavoritePost {
   authorId   String     @unique
   createdAt  DateTime   @default(now())
   updatedAt  DateTime   @updatedAt
+  @@unique([authorId, postId])
 }
 
 model Comment {
@@ -81,6 +83,7 @@ model CommentLike {
   authorId   String     @unique
   createdAt  DateTime   @default(now())
   updatedAt  DateTime   @updatedAt
+  @@unique([authorId, commentId])
 }
 
 model Follow {
