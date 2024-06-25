@@ -104,7 +104,7 @@ export async function deletePost({
   postId: string
   authorId: string
 }) {
-  try {s
+  try {
     await prisma.post.deleteMany({
       where: {
         id: postId,
@@ -118,10 +118,7 @@ export async function deletePost({
       success: true
     }
   } catch (error) {
-    return {
-      success: false,
-      statuscode: 500
-    }
+    throw new Error('Failed to delete post')
   }
 }
 
