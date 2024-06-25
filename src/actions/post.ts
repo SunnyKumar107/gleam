@@ -23,6 +23,16 @@ export async function getPostTable() {
   return posts
 }
 
+export async function getPostsForDiscover() {
+  const posts = await prisma.post.findMany({
+    orderBy: {
+      createdAt: 'desc'
+    },
+    take: 18
+  })
+  return posts
+}
+
 export async function getPostById(id: string) {
   const post = await prisma.post.findUnique({
     where: {

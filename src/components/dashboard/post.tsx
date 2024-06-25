@@ -182,7 +182,7 @@ const Post = ({ post }: PostProps) => {
         </Link>
       ) : null}
       <div className="px-2 text-sm sm:px-1">
-        <p className="max-w-[350px]">
+        <p>
           <span className="mr-2 font-semibold">{post.author.username}</span>
           {post.caption}
         </p>

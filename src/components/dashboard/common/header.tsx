@@ -20,7 +20,7 @@ const Header = ({ type, name }: { type: string; name?: string }) => {
           className={cn(
             'flex h-full w-full items-center justify-center border-b-2 border-background text-lg font-medium md:text-xl',
             {
-              'border-primary md:bg-secondary font-semibold text-foreground':
+              'border-primary font-semibold text-foreground md:bg-secondary':
                 pathname === `/dashboard/user/${name}/followers`
             }
           )}
@@ -32,7 +32,7 @@ const Header = ({ type, name }: { type: string; name?: string }) => {
           className={cn(
             'flex h-full w-full items-center justify-center border-b-2 border-background text-lg font-medium md:text-xl',
             {
-              'border-primary md:bg-secondary font-semibold text-foreground':
+              'border-primary font-semibold text-foreground md:bg-secondary':
                 pathname === `/dashboard/user/${name}/following`
             }
           )}
@@ -98,6 +98,16 @@ const Header = ({ type, name }: { type: string; name?: string }) => {
             <ArrowLeft />
           </Link>
           <h2 className="text-xl font-semibold">Favorites</h2>
+        </div>
+      )}
+
+      {/* Your profile page */}
+      {type === 'discover' && (
+        <div className="flex items-center space-x-4">
+          <Link href={'/dashboard'}>
+            <ArrowLeft />
+          </Link>
+          <h2 className="text-xl font-semibold">Discoer</h2>
         </div>
       )}
 
