@@ -13,7 +13,7 @@ import {
 } from '@/components/ui/alert-dialog'
 import { deletePost } from '@/actions/post'
 import { useToast } from '../ui/use-toast'
-import { useRouter } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { LoaderCircle } from 'lucide-react'
 
@@ -24,6 +24,7 @@ export function PostDeleteAlert({
   postId: string
   authorId: string
 }) {
+  const pathname = usePathname()
   const router = useRouter()
   const { toast } = useToast()
   const [pending, setPending] = useState(false)
@@ -37,7 +38,9 @@ export function PostDeleteAlert({
       toast({
         title: 'Post deleted successfully'
       })
-      router.back()
+      if (pathname !== '/dashboard') {
+        router.back()
+      }
       return
     }
 

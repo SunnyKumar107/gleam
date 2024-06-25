@@ -105,6 +105,32 @@ export async function deletePost({
   authorId: string
 }) {
   try {
+    await prisma.comment.deleteMany({
+      where: {
+        postId
+      }
+    })
+
+    await prisma.postLike.deleteMany({
+      where: {
+        postId
+      }
+    })
+
+    await prisma.favoritePost.deleteMany({
+      where: {
+        postId
+      }
+    })
+
+    await prisma.commentLike.deleteMany({
+      where: {
+        comment: {
+          postId
+        }
+      }
+    })
+
     await prisma.post.deleteMany({
       where: {
         id: postId,
@@ -113,6 +139,7 @@ export async function deletePost({
     })
     revalidatePath('/dashboard')
     revalidatePath('/dashboard/post/[postId]', 'page')
+    revalidatePath('/dashboard/profile')
     return {
       success: true
     }
