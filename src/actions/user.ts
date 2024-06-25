@@ -167,40 +167,12 @@ export async function updateUser({
 
 export async function deleteUser({ userId }: { userId: string }) {
   try {
-    await prisma.post.deleteMany({
-      where: { authorId: userId }
-    })
-
-    await prisma.comment.deleteMany({
-      where: { authorId: userId }
-    })
-
-    await prisma.favoritePost.deleteMany({
-      where: { authorId: userId }
-    })
-
-    await prisma.follow.deleteMany({
-      where: { followerId: userId }
-    })
-
-    await prisma.follow.deleteMany({
-      where: { followingId: userId }
-    })
-
-    await prisma.postLike.deleteMany({
-      where: { authorId: userId }
-    })
-
-    await prisma.commentLike.deleteMany({
-      where: { authorId: userId }
-    })
-
     await prisma.user.delete({
       where: { id: userId }
     })
     return { success: true, status: 200, message: 'User deleted successfully' }
   } catch (error) {
-    return { success: false, status: 500, message: 'Failed to delete user' }
+    throw new Error('Failed to delete user')
   }
 }
 
