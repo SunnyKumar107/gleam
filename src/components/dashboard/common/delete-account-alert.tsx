@@ -26,14 +26,15 @@ export function AlertDelete() {
   const handleDeleteAccount = async () => {
     setPending(true)
     const res = await deleteUser({ userId: session?.user.id! })
+
+    setPending(false)
     if (res.success) {
       logoutUser()
-      setPending(false)
       toast({
         title: 'Account deleted successfully!'
       })
+      return
     }
-    setPending(false)
     toast({
       variant: 'destructive',
       title: 'Something went wrong!',
