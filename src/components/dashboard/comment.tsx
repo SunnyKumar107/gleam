@@ -7,6 +7,7 @@ import { useSession } from 'next-auth/react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
+import { CommentMenu } from './comment-menu'
 
 type CommentProps = {
   comment: {
@@ -15,6 +16,7 @@ type CommentProps = {
     createdAt: Date
     updatedAt: Date
     author: {
+      id: string
       username: string
       image: string | null
     }
@@ -22,6 +24,9 @@ type CommentProps = {
       id: string
       authorId: string
     }[]
+    post: {
+      authorId: string
+    }
   }
 }
 
@@ -92,11 +97,16 @@ const Comment = ({ comment }: CommentProps) => {
                 <Dot size={16} />
               </h3>
             </Link>
-            <span className="text-xs font-normal">
+            <span className="mr-2 text-xs font-normal">
               {formatDistance(new Date(comment.createdAt), new Date(), {
                 addSuffix: true
               })}
             </span>
+            <CommentMenu
+              commentId={comment.id}
+              userId={comment.author.id}
+              postAuthorId={comment.post.authorId}
+            />
           </div>
           <p className="text-sm">{comment.text}</p>
         </div>

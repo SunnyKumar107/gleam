@@ -54,7 +54,7 @@ export function PostDeleteAlert({
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <button className="h-full w-full px-2 pb-1 text-start">
+        <button className="h-full w-full px-2 py-1 text-start text-sm">
           {pending ? (
             <LoaderCircle size={16} className="h-4 w-4 animate-spin" />
           ) : (
