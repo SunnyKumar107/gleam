@@ -6,7 +6,6 @@ import { Button } from '@/components/ui/button'
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuItem,
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu'
 import { EllipsisVertical } from 'lucide-react'
@@ -37,7 +36,9 @@ export function PostMenu({
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        <DropdownMenuItem>Download</DropdownMenuItem>
+        <a href={imgUrl} download={imgUrl} className="px-2 py-1 text-sm">
+          Download
+        </a>
         {session?.user.id === userId && (
           <PostDeleteAlert
             postId={postId}

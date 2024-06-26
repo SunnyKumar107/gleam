@@ -7,6 +7,7 @@ import Link from 'next/link'
 import { Button } from '../ui/button'
 import FollowButton from './follow-button'
 import PostImage from './post-image'
+import { ShareProfile } from './share-profile'
 
 type PostType = {
   id: string
@@ -89,9 +90,7 @@ const Profile = ({ user }: UserProps) => {
           ) : (
             <FollowButton followers={user.followers} userId={user.id} />
           )}
-          <Button variant="secondary" className="w-full max-w-72">
-            Share Profile
-          </Button>
+          <ShareProfile username={user.username} />
         </div>
       </div>
       {user.posts.length ? (
