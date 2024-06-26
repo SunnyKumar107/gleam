@@ -146,7 +146,11 @@ const Post = ({ post }: PostProps) => {
           </div>
         </div>
         <div className="-mb-2">
-          <PostMenu postId={post.id} userId={post.author.id} />
+          <PostMenu
+            postId={post.id}
+            userId={post.author.id}
+            imgUrl={post.image}
+          />
         </div>
       </div>
       <div className="flex max-h-[500px] w-full items-center overflow-hidden bg-foreground/10">

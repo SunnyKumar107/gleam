@@ -16,13 +16,16 @@ import { useToast } from '../ui/use-toast'
 import { usePathname, useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { LoaderCircle } from 'lucide-react'
+import { deleteImage } from '@/actions/delete-img'
 
 export function PostDeleteAlert({
   postId,
-  authorId
+  authorId,
+  imgUrl
 }: {
   postId: string
   authorId: string
+  imgUrl: string
 }) {
   const pathname = usePathname()
   const router = useRouter()
@@ -31,6 +34,7 @@ export function PostDeleteAlert({
 
   const handleDeletePost = async () => {
     setPending(true)
+    await deleteImage(imgUrl)
     const res = await deletePost({ postId, authorId: authorId })
 
     setPending(false)

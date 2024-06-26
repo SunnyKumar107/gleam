@@ -207,7 +207,7 @@ const EditProfile = ({ user }: UserProps) => {
         />
       </div>
       <div className="flex justify-end space-x-2">
-        <AlertDelete />
+        <AlertDelete imgUrl={imgUrl} />
         <Button
           className="w-[200px] uppercase"
           disabled={!fullName || !username || !isUpdate || loading}

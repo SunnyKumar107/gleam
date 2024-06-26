@@ -1,5 +1,6 @@
 'use client'
 
+import { deleteImage } from '@/actions/delete-img'
 import { deleteUser, logoutUser } from '@/actions/user'
 import {
   AlertDialog,
@@ -18,13 +19,16 @@ import { LoaderCircle, Trash2 } from 'lucide-react'
 import { useSession } from 'next-auth/react'
 import { useState } from 'react'
 
-export function AlertDelete() {
+export function AlertDelete({ imgUrl }: { imgUrl: string | null }) {
   const [pending, setPending] = useState(false)
   const { data: session } = useSession()
   const { toast } = useToast()
 
   const handleDeleteAccount = async () => {
     setPending(true)
+    if (imgUrl) {
+      await deleteImage(imgUrl)
+    }
     const res = await deleteUser({ userId: session?.user.id! })
 
     setPending(false)

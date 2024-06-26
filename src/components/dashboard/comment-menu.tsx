@@ -1,33 +1,36 @@
 'use client'
 
-import * as React from 'react'
+import React, { useState } from 'react'
 
 import { Button } from '@/components/ui/button'
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuItem,
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu'
 import { useSession } from 'next-auth/react'
-import { Ellipsis } from 'lucide-react'
+import { Ellipsis, LoaderCircle } from 'lucide-react'
 import { useToast } from '../ui/use-toast'
 import { deleteComment } from '@/actions/comment'
 
 export function CommentMenu({
   commentId,
-  userId,
+  commentAuthorId,
   postAuthorId
 }: {
   commentId: string
-  userId: string
+  commentAuthorId: string
   postAuthorId: string
 }) {
   const { data: session } = useSession()
   const { toast } = useToast()
+  const [pending, setPending] = useState(false)
 
   const handleDeleteComment = async () => {
+    setPending(true)
     const res = await deleteComment({ commentId })
+
+    setPending(false)
     if (res.success) {
       toast({
         title: 'Comment deleted successfully'
@@ -55,12 +58,60 @@ export function CommentMenu({
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        {session?.user.id === userId ||
-          (session?.user.id === postAuthorId && (
-            <DropdownMenuItem onClick={handleDeleteComment}>
-              Delete
-            </DropdownMenuItem>
-          ))}
+        {(() => {
+          if (session?.user.id === commentAuthorId) {
+            return (
+              <button
+                className="h-full w-full px-2 py-1 text-start text-sm"
+                onClick={handleDeleteComment}
+              >
+                {pending ? (
+                  <LoaderCircle size={16} className="h-4 w-4 animate-spin" />
+                ) : (
+                  'Delete'
+                )}
+              </button>
+            )
+          }
+          if (session?.user.id === postAuthorId) {
+            return (
+              <button
+                className="h-full w-full px-2 py-1 text-start text-sm"
+                onClick={handleDeleteComment}
+              >
+                {pending ? (
+                  <LoaderCircle size={16} className="h-4 w-4 animate-spin" />
+                ) : (
+                  'Delete'
+                )}
+              </button>
+            )
+          }
+        })()}
+        {/* {session?.user.id === commentAuthorId && (
+          <button
+            className="h-full w-full px-2 py-1 text-start text-sm"
+            onClick={handleDeleteComment}
+          >
+            {pending ? (
+              <LoaderCircle size={16} className="h-4 w-4 animate-spin" />
+            ) : (
+              'Delete'
+            )}
+          </button>
+        )}
+        {session?.user.id === postAuthorId && (
+          <button
+            className="h-full w-full px-2 py-1 text-start text-sm"
+            onClick={handleDeleteComment}
+          >
+            {pending ? (
+              <LoaderCircle size={16} className="h-4 w-4 animate-spin" />
+            ) : (
+              'Delete'
+            )}
+          </button>
+        )} */}
       </DropdownMenuContent>
     </DropdownMenu>
   )

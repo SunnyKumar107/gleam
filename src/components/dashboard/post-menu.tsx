@@ -15,10 +15,12 @@ import { PostDeleteAlert } from './post-delete-alert'
 
 export function PostMenu({
   postId,
-  userId
+  userId,
+  imgUrl
 }: {
   postId: string
   userId: string
+  imgUrl: string
 }) {
   const { data: session } = useSession()
 
@@ -37,7 +39,11 @@ export function PostMenu({
       <DropdownMenuContent align="end">
         <DropdownMenuItem>Download</DropdownMenuItem>
         {session?.user.id === userId && (
-          <PostDeleteAlert postId={postId} authorId={session?.user.id} />
+          <PostDeleteAlert
+            postId={postId}
+            authorId={session?.user.id}
+            imgUrl={imgUrl}
+          />
         )}
       </DropdownMenuContent>
     </DropdownMenu>

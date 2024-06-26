@@ -104,7 +104,7 @@ const Comment = ({ comment }: CommentProps) => {
             </span>
             <CommentMenu
               commentId={comment.id}
-              userId={comment.author.id}
+              commentAuthorId={comment.author.id}
               postAuthorId={comment.post.authorId}
             />
           </div>
