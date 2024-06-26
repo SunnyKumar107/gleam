@@ -25,7 +25,7 @@ export function ShareProfile({ username }: { username: string }) {
           Share Profile
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-md">
+      <DialogContent className="max-w-[350px] md:max-w-[450px]">
         <DialogHeader>
           <DialogTitle>Share link</DialogTitle>
           <DialogDescription>

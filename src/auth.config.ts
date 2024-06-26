@@ -34,7 +34,10 @@ export const authConfig = {
       }
       return true
     },
-    async jwt({ token, trigger, user }) {
+    async jwt({ token, trigger, user, session }) {
+      if (trigger === 'update' && session) {
+        return { token, user: session.user }
+      }
       if (user) {
         return { token, user }
       }
