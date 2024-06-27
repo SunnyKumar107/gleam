@@ -7,7 +7,8 @@
     "build": "prisma migrate deploy && prisma generate && next build",
     "start": "next start",
     "lint": "next lint",
-    "studio": "prisma studio"
+    "studio": "prisma studio",
+    "seed": "node -r ./src/lib/seed.ts"
   },
   "dependencies": {
     "@prisma/client": "^5.15.0",
