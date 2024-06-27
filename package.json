@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "studio": "prisma studio",
-    "seed": "node --watch ./src/lib/seed.ts"
+    "seed": "node --watch ./src/lib/seed.js"
   },
   "dependencies": {
     "@prisma/client": "^5.15.0",

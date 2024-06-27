@@ -13,6 +13,8 @@ export default async function Dashboard() {
   const users = await getUserTable(session?.user.id as string)
   const loginUser = await getUserByUsername(session?.user.username as string)
 
+  const randomUsers = users.sort(() => 0.5 - Math.random()).slice(0, 4)
+
   return (
     <main className="flex w-full">
       <Header type="home" />
@@ -24,7 +26,7 @@ export default async function Dashboard() {
       <div className="fixed right-6 top-0 hidden max-h-[400px] pt-8 xl:block">
         <h3 className="mb-2 text-lg font-medium">Suggested for you</h3>
         <div className="grid grid-cols-2 gap-4">
-          {users.map((user) => (
+          {randomUsers.map((user) => (
             <User user={user} key={user.id} loginUser={loginUser!} />
           ))}
         </div>

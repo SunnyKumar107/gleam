@@ -1,10 +1,7 @@
 'use server'
 
 const { PrismaClient } = require('@prisma/client')
-const { bcrypt } = require('bcrypt')
-
-// import { PrismaClient } from '@prisma/client'
-// import bcrypt from 'bcrypt'
+const bcrypt = require('bcrypt')
 
 const prisma = new PrismaClient()
 
@@ -153,7 +150,9 @@ async function createUsers() {
   ]
 
   let users = []
+
   for (let i = 1; i <= fakeUsers.length; i++) {
+    if (!fakeUsers[i]?.password) break
     const hashedPassword = await bcrypt.hash(fakeUsers[i].password, 10)
     users.push({
       ...fakeUsers[i],
@@ -161,7 +160,7 @@ async function createUsers() {
       image: `https://picsum.photos/seed/${i}/300/300`
     })
   }
-
+  console.log(users)
   await prisma.user.createMany({
     data: users,
     skipDuplicates: true // Optional: skips duplicate entries based on unique constraints
@@ -170,7 +169,35 @@ async function createUsers() {
   console.log('Seed users created successfully!')
 }
 
-createUsers()
+async function createPosts() {
+  const posts = []
+
+  const users = await prisma.user.findMany({
+    select: {
+      id: true
+    }
+  })
+
+  for (let i = 0; i <= users.length; i++) {
+    if (!users[i]?.id) break
+
+    for (let j = 0; j < 10; j++) {
+      posts.push({
+        image: `https://picsum.photos/seed/${(20 + j) * (i + 1)}/900/900`,
+        authorId: users[i].id
+      })
+    }
+  }
+
+  console.log(posts)
+  await prisma.post.createMany({
+    data: posts
+  })
+
+  console.log('Seed posts created successfully!')
+}
+
+createPosts()
   .catch((e) => {
     console.error(e)
     process.exit(1)
