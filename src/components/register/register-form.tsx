@@ -29,6 +29,7 @@ export default function RegisterForm() {
             name="email"
             placeholder="johndoe@email.com"
             required
+            className="lowercase"
           />
         </div>
         <div className="flex flex-col items-start gap-3">
@@ -40,6 +41,7 @@ export default function RegisterForm() {
             placeholder="johndoe"
             required
             minLength={3}
+            className="lowercase"
           />
         </div>
         <div className="flex flex-col items-start gap-3">

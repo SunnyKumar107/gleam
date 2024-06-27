@@ -35,13 +35,13 @@ export function AlertDelete({ imgUrl }: { imgUrl: string | null }) {
     if (res.success) {
       logoutUser()
       toast({
-        title: 'Account deleted successfully!'
+        title: 'Account deleted successfully'
       })
       return
     }
     toast({
       variant: 'destructive',
-      title: 'Something went wrong!',
+      title: 'Something went wrong',
       description: 'Please try again'
     })
   }

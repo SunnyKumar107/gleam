@@ -29,6 +29,7 @@ export default function LoginForm() {
             name="email"
             placeholder="johndoe@email.com"
             required
+            className="lowercase"
           />
         </div>
         <div className="relative flex flex-col items-start gap-3">

@@ -14,7 +14,8 @@ import { Textarea } from '../ui/textarea'
 import { Button } from '../ui/button'
 import { UserData } from '@/auth.config'
 import { useSession } from 'next-auth/react'
-import { AlertDelete } from './common/delete-account-alert'
+import { AlertDelete } from './delete-account-alert'
+import { revalidate } from '@/actions/revalidate'
 
 type UserProps = {
   user: UserData
@@ -96,13 +97,15 @@ const EditProfile = ({ user }: UserProps) => {
         image: imgUrl
       })
       if (res.success) {
-        update({
+        await update({
           ...session!.user,
           name: fullName,
           username: uniqueUsername,
           bio: bio,
           image: imgUrl
         })
+
+        revalidate()
         setLoading(false)
         toast({
           title: 'Profile Updated Successfully'
@@ -132,7 +135,7 @@ const EditProfile = ({ user }: UserProps) => {
               alt="profile"
               width={100}
               height={100}
-              className="min-h-20 object-cover"
+              className="h-full w-full object-cover"
             />
           </div>
           {imgUrl && (

@@ -1,10 +1,13 @@
 import { z } from 'zod'
 
 export const UserSchema = z.object({
-  email: z.string({
-    invalid_type_error: 'Email must be a string.',
-    required_error: 'Email is required.'
-  }),
+  email: z
+    .string({
+      invalid_type_error: 'Email must be a string.',
+      required_error: 'Email is required.'
+    })
+    .email('Email must be a valid email address.')
+    .max(25, 'Email must have at most 50 characters.'),
   name: z.string({
     invalid_type_error: 'Name must be a string.',
     required_error: 'Name is required.'
@@ -14,7 +17,19 @@ export const UserSchema = z.object({
       invalid_type_error: 'Username must be a string.',
       required_error: 'Username is required.'
     })
-    .min(3, 'Username must have at least 3 characters.'),
+    .trim()
+    .min(3, 'Username must have at least 3 characters.')
+    .max(20, 'Username must have at most 20 characters.')
+    .refine(
+      (username) => {
+        return /^[a-zA-Z0-9_]+$/.test(username)
+      },
+      {
+        message:
+          'Username must only contain letters, numbers, and underscores.',
+        path: ['username']
+      }
+    ),
   password: z
     .string({
       invalid_type_error: 'Password must be a string.',
