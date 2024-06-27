@@ -11,7 +11,7 @@ export default async function Favorites() {
   return (
     <>
       <Header type="favorites" />
-      <div className="mb-12 mt-14 flex h-[calc(100vh-100px)] flex-col md:mb-0 md:mt-0 md:h-[calc(100vh)] md:px-4 md:py-6">
+      <div className="mb-12 mt-14 flex min-h-[calc(100vh-100px)] flex-col md:mb-0 md:mt-0 md:min-h-[calc(100vh)] md:px-4 md:py-6">
         <div className="mb-6 hidden px-2 text-3xl font-medium md:block">
           Favorites
         </div>

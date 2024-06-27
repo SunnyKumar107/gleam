@@ -178,15 +178,11 @@ async function createPosts() {
     }
   })
 
-  for (let i = 0; i <= users.length; i++) {
-    if (!users[i]?.id) break
-
-    for (let j = 0; j < 10; j++) {
-      posts.push({
-        image: `https://picsum.photos/seed/${(20 + j) * (i + 1)}/900/900`,
-        authorId: users[i].id
-      })
-    }
+  for (let i = 0; i < 250; i++) {
+    posts.push({
+      image: `https://picsum.photos/seed/${20 + i}/900/900`,
+      authorId: users[Math.floor(Math.random() * users.length)].id
+    })
   }
 
   console.log(posts)
@@ -197,12 +193,15 @@ async function createPosts() {
   console.log('Seed posts created successfully!')
 }
 
-createPosts()
-  .catch((e) => {
+;(async function () {
+  try {
+    await createUsers()
+    await createPosts()
+  } catch (e) {
     console.error(e)
     process.exit(1)
-  })
-  .finally(async () => {
+  } finally {
     await prisma.$disconnect()
     process.exit()
-  })
+  }
+})()

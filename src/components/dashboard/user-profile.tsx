@@ -41,7 +41,7 @@ const Profile = ({ user }: UserProps) => {
   if (!user) return
 
   return (
-    <div className="mb-12 mt-14 flex h-[calc(100vh-100px)] flex-col justify-start py-4 md:mb-0 md:mt-0 md:h-[calc(100vh)] md:px-4 md:py-8 lg:px-16">
+    <div className="mb-12 mt-14 flex min-h-[calc(100vh-100px)] flex-col justify-start py-4 md:mb-0 md:mt-0 md:min-h-[calc(100vh)] md:px-4 md:py-8 lg:px-16">
       <div className="h-fit w-full border-b border-foreground/20 px-0 xl:px-12">
         <div className="flex w-screen items-center justify-between space-x-4 px-6 md:w-full md:justify-start lg:space-x-8">
           <div className="h-20 w-20 overflow-hidden rounded-full bg-foreground/10 md:h-28 md:w-28 lg:h-36 lg:w-36">
@@ -94,7 +94,7 @@ const Profile = ({ user }: UserProps) => {
         </div>
       </div>
       {user.posts.length ? (
-        <div className="flex flex-wrap gap-1 p-1">
+        <div className="flex flex-wrap gap-x-1 p-1">
           {user.posts.map((post: PostType) => (
             <PostImage key={post.id} post={post} />
           ))}

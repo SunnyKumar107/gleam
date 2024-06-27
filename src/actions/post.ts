@@ -18,7 +18,8 @@ export async function getPostTable() {
     },
     orderBy: {
       createdAt: 'desc'
-    }
+    },
+    take: 15
   })
   return posts
 }
@@ -28,7 +29,7 @@ export async function getPostsForDiscover() {
     orderBy: {
       createdAt: 'desc'
     },
-    take: 18
+    take: 24
   })
   return posts
 }
