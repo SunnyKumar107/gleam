@@ -35,8 +35,8 @@ export function PostMenu({
           <span className="sr-only">Post menu</span>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end">
-        <a href={imgUrl} download={imgUrl} className="px-2 py-1 text-sm">
+      <DropdownMenuContent align="end" className="max-w-[100px]">
+        <a href={imgUrl} download={imgUrl} className="p-2 text-sm">
           Download
         </a>
         {session?.user.id === userId && (

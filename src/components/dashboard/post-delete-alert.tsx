@@ -43,7 +43,7 @@ export function PostDeleteAlert({
         title: 'Post deleted successfully'
       })
       if (pathname !== '/dashboard') {
-        router.back()
+        router.replace('/dashboard/profile')
       }
       return
     }

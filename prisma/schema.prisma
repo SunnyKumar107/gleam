@@ -57,7 +57,7 @@ model FavoritePost {
   post       Post       @relation(fields: [postId], references: [id], onDelete: Cascade)
   postId     String      
   author     User       @relation(fields: [authorId], references: [id], onDelete: Cascade)
-  authorId   String     @unique
+  authorId   String     
   createdAt  DateTime   @default(now())
   updatedAt  DateTime   @updatedAt
   @@unique([authorId, postId])
@@ -80,7 +80,7 @@ model CommentLike {
   comment    Comment    @relation(fields: [commentId], references: [id], onDelete: Cascade)
   commentId  String     
   author     User       @relation(fields: [authorId], references: [id], onDelete: Cascade)
-  authorId   String     @unique
+  authorId   String     
   createdAt  DateTime   @default(now())
   updatedAt  DateTime   @updatedAt
   @@unique([authorId, commentId])
