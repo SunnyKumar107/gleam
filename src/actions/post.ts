@@ -24,12 +24,21 @@ export async function getPostTable() {
   return posts
 }
 
-export async function getPostsForDiscover() {
+export async function getPostsForDiscover({
+  page,
+  limit
+}: {
+  page: number
+  limit: number
+}) {
+  const skip = (page - 1) * limit
+
   const posts = await prisma.post.findMany({
     orderBy: {
       createdAt: 'desc'
     },
-    take: 24
+    take: limit,
+    skip: skip
   })
   return posts
 }

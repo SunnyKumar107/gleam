@@ -123,7 +123,7 @@ export async function likeComment({
 
 export async function removeLikeComment({ likeId }: { likeId: string }) {
   try {
-    await prisma.postLike.delete({
+    await prisma.commentLike.delete({
       where: {
         id: likeId
       }
