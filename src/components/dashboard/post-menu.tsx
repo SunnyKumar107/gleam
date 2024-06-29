@@ -36,7 +36,7 @@ export function PostMenu({
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="max-w-[100px]">
-        <a href={imgUrl} download={imgUrl} className="p-2 text-sm">
+        <a download={imgUrl} className="p-2 text-sm">
           Download
         </a>
         {session?.user.id === userId && (

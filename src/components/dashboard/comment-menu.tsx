@@ -48,70 +48,45 @@ export function CommentMenu({
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button
-          variant="ghost"
-          size="icon"
-          className="z-0 h-[1.2rem] w-[1.2rem] hover:bg-background"
-        >
-          <Ellipsis size={16} />
-          <span className="sr-only">Comment menu</span>
-        </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align="end">
         {(() => {
-          if (session?.user.id === commentAuthorId) {
+          if (session?.user?.id === commentAuthorId) {
             return (
-              <button
-                className="h-full w-full px-2 py-1 text-start text-sm"
-                onClick={handleDeleteComment}
+              <Button
+                variant="ghost"
+                size="icon"
+                className="z-0 h-[1.2rem] w-[1.2rem] hover:bg-background"
               >
-                {pending ? (
-                  <LoaderCircle size={16} className="h-4 w-4 animate-spin" />
-                ) : (
-                  'Delete'
-                )}
-              </button>
+                <Ellipsis size={16} />
+                <span className="sr-only">Comment menu</span>
+              </Button>
             )
           }
-          if (session?.user.id === postAuthorId) {
+
+          if (session?.user?.id === postAuthorId) {
             return (
-              <button
-                className="h-full w-full px-2 py-1 text-start text-sm"
-                onClick={handleDeleteComment}
+              <Button
+                variant="ghost"
+                size="icon"
+                className="z-0 h-[1.2rem] w-[1.2rem] hover:bg-background"
               >
-                {pending ? (
-                  <LoaderCircle size={16} className="h-4 w-4 animate-spin" />
-                ) : (
-                  'Delete'
-                )}
-              </button>
+                <Ellipsis size={16} />
+                <span className="sr-only">Comment menu</span>
+              </Button>
             )
           }
         })()}
-        {/* {session?.user.id === commentAuthorId && (
-          <button
-            className="h-full w-full px-2 py-1 text-start text-sm"
-            onClick={handleDeleteComment}
-          >
-            {pending ? (
-              <LoaderCircle size={16} className="h-4 w-4 animate-spin" />
-            ) : (
-              'Delete'
-            )}
-          </button>
-        )}
-        {session?.user.id === postAuthorId && (
-          <button
-            className="h-full w-full px-2 py-1 text-start text-sm"
-            onClick={handleDeleteComment}
-          >
-            {pending ? (
-              <LoaderCircle size={16} className="h-4 w-4 animate-spin" />
-            ) : (
-              'Delete'
-            )}
-          </button>
-        )} */}
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="end">
+        <button
+          className="h-full w-full px-2 py-1 text-start text-sm"
+          onClick={handleDeleteComment}
+        >
+          {pending ? (
+            <LoaderCircle size={16} className="h-4 w-4 animate-spin" />
+          ) : (
+            'Delete'
+          )}
+        </button>
       </DropdownMenuContent>
     </DropdownMenu>
   )
