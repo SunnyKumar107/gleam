@@ -13,7 +13,7 @@ export default async function SideNav() {
   const user = session?.user!
 
   return (
-    <section className="wrap fixed bottom-0 flex h-12 w-full border-t border-foreground/10 bg-background md:h-screen md:max-w-64 md:flex-col md:gap-6 md:border-r md:border-t-0 md:px-8 md:py-4">
+    <section className="wrap fixed bottom-0 z-10 flex h-12 w-full border-t border-foreground/10 bg-background md:h-screen md:max-w-64 md:flex-col md:gap-6 md:border-r md:border-t-0 md:px-8 md:py-4">
       <div className="hidden py-2 md:block">
         <Logo />
       </div>

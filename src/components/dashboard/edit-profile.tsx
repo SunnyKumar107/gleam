@@ -125,7 +125,7 @@ const EditProfile = ({ user }: UserProps) => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="relative mt-14 h-[calc(100vh-56px)] bg-background px-4 py-4 md:mt-0 md:h-screen md:px-8 md:py-6"
+      className="relative z-20 mt-14 h-[calc(100vh-56px)] bg-background px-4 py-4 md:mt-0 md:h-screen md:px-8 md:py-6"
     >
       <div className="mb-4 flex items-center justify-between rounded-lg border bg-foreground/5 p-4">
         <div className="relative">

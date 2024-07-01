@@ -38,11 +38,11 @@ export default function Favorites() {
   }
 
   const onScroll = async () => {
-    const { scrollHeight, scrollTop, clientHeight } = document.documentElement
-    if (scrollHeight - scrollTop <= clientHeight * 2) {
-      if (!loading) {
-        await loadMorePost()
-      }
+    if (
+      window.innerHeight + window.scrollY >= document.body.offsetHeight - 100 &&
+      !loading
+    ) {
+      await loadMorePost()
     }
   }
 
