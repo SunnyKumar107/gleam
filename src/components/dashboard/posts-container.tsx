@@ -35,7 +35,7 @@ export default async function PostsContainer() {
 
   useEffect(() => {
     const fetchPosts = async () => {
-      const initialData = await getPostTable(page, 15)
+      const initialData = await getPostTable({ page, limit: 15 })
       setPosts(initialData)
     }
 
@@ -44,7 +44,7 @@ export default async function PostsContainer() {
 
   const loadMorePost = async () => {
     setLoading(true)
-    const morePost = await getPostTable(page + 1, 15)
+    const morePost = await getPostTable({ page: page + 1, limit: 15 })
 
     if (morePost.length > 0) {
       setPosts((currentPosts) => [...currentPosts, ...morePost])

@@ -4,10 +4,13 @@ import { prisma } from '@/lib/db'
 import { RegisterPostSchema } from '@/schema/post.schema'
 import { revalidatePath } from 'next/cache'
 
-export async function getPostTable(
-  page: number,
+export async function getPostTable({
+  page,
+  limit
+}: {
+  page: number
   limit: number
-) {
+}) {
   const skip = (page - 1) * limit
 
   const posts = await prisma.post.findMany({

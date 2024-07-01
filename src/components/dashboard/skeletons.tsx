@@ -4,7 +4,7 @@ const shimmer =
 
 export function PostSkeleton() {
   return (
-    <div className="flex w-screen flex-col overflow-hidden pb-1 shadow-sm sm:w-[480px]">
+    <div className="flex w-screen flex-col overflow-hidden pb-1 sm:w-[480px]">
       <div className="flex w-full items-center justify-between px-2 py-2 md:px-1">
         <div className="flex items-center space-x-2">
           <div className="h-8 w-8 rounded-full bg-foreground/10"></div>

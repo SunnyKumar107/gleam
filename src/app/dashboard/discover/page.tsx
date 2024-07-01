@@ -31,7 +31,7 @@ export default function Favorites() {
     const morePost = await getPostsForDiscover({ page: page + 1, limit: 21 })
 
     if (morePost.length > 0) {
-      setPosts([...posts, ...morePost])
+      setPosts((currentPosts) => [...currentPosts, ...morePost])
       setPage(page + 1)
     }
     setLoading(false)
