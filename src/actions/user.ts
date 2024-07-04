@@ -122,14 +122,53 @@ export async function getUserByUsername(username: string) {
   }
 }
 
-export async function getUserTable(userId: string) {
+export async function getSuggestedUsers(userId: string) {
   try {
-    const users = await prisma.user.findMany({
+    const suggestedUsers = await prisma.user.findMany({
       where: {
-        id: { not: userId }
-      }
+        AND: [
+          {
+            followers: {
+              none: {
+                followerId: userId
+              }
+            }
+          },
+          {
+            id: {
+              not: userId
+            }
+          }
+        ]
+      },
+      include: {
+        followers: {
+          select: {
+            followerId: true
+          }
+        },
+        following: {
+          select: {
+            followingId: true
+          }
+        }
+      },
+      orderBy: [
+        {
+          followers: {
+            _count: 'desc'
+          }
+        },
+        {
+          following: {
+            _count: 'desc'
+          }
+        }
+      ],
+      take: 4
     })
-    return users
+
+    return suggestedUsers
   } catch (error) {
     throw new Error('Failed to fetch all users')
   }

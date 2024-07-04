@@ -1,4 +1,4 @@
-import { getUserByUsername, getUserTable } from '@/actions/user'
+import { getSuggestedUsers, getUserByUsername } from '@/actions/user'
 import { auth } from '@/auth'
 import Header from '@/components/dashboard/common/header'
 import { CreatePost } from '@/components/dashboard/create-post'
@@ -8,12 +8,14 @@ import User from '@/components/dashboard/user'
 import { ThemeToggle } from '@/components/theme-toggle'
 import { Suspense } from 'react'
 
-export default async function Dashboard() {
+export default async function DashboardPage() {
   const session = await auth()
-  const users = await getUserTable(session?.user.id as string)
-  const loginUser = await getUserByUsername(session?.user.username as string)
+  if (!session?.user) {
+    return null
+  }
 
-  const randomUsers = users.sort(() => 0.5 - Math.random()).slice(0, 4)
+  const suggestedUsers = await getSuggestedUsers(session.user.id)
+  const loginUser = await getUserByUsername(session.user.username)
 
   return (
     <main className="flex min-h-screen w-full">
@@ -24,7 +26,7 @@ export default async function Dashboard() {
       <div className="fixed right-6 top-0 hidden max-h-[400px] pt-8 xl:block">
         <h3 className="mb-2 text-lg font-medium">Suggested for you</h3>
         <div className="grid grid-cols-2 gap-4">
-          {randomUsers.map((user) => (
+          {suggestedUsers.map((user) => (
             <User user={user} key={user.id} loginUser={loginUser!} />
           ))}
         </div>

@@ -14,9 +14,19 @@ import {
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { CopyIcon } from 'lucide-react'
+import { useToast } from '../ui/use-toast'
 
 export function ShareProfile({ username }: { username: string }) {
   const baseUrl = 'https://gleam-seven.vercel.app'
+  const { toast } = useToast()
+
+  const handleCopyProfile = async () => {
+    const copyText = `${baseUrl}/dashboard/user/${username}`
+    await window.navigator.clipboard.writeText(copyText)
+    toast({
+      title: 'Copied'
+    })
+  }
 
   return (
     <Dialog>
@@ -43,7 +53,12 @@ export function ShareProfile({ username }: { username: string }) {
               readOnly
             />
           </div>
-          <Button type="submit" size="sm" className="px-3">
+          <Button
+            type="submit"
+            size="sm"
+            className="px-3"
+            onClick={handleCopyProfile}
+          >
             <span className="sr-only">Copy</span>
             <CopyIcon className="h-4 w-4" />
           </Button>

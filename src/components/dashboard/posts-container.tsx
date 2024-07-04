@@ -28,7 +28,7 @@ type PostType = {
   }[]
 }
 
-export default async function PostsContainer() {
+export default function PostsContainer() {
   const [posts, setPosts] = useState<PostType[]>([])
   const [page, setPage] = useState(1)
   const [loading, setLoading] = useState(false)
