@@ -1,3 +1,5 @@
+'use client'
+
 export function PostSkeleton() {
   return (
     <div className="flex w-screen flex-col overflow-hidden pb-1 sm:w-[480px]">
@@ -23,14 +25,12 @@ export function PostSkeleton() {
 
 export function PostsSkeleton() {
   return (
-    <div className="mb-12 mt-14 md:mb-0 md:mt-0">
-      <div className="flex flex-col flex-wrap gap-2 py-2 sm:px-10  md:px-14 md:py-6 xl:px-24">
-        <PostSkeleton />
-        <PostSkeleton />
-        <PostSkeleton />
-        <PostSkeleton />
-        <PostSkeleton />
-      </div>
-    </div>
+    <>
+      <PostSkeleton />
+      <PostSkeleton />
+      <PostSkeleton />
+      <PostSkeleton />
+      <PostSkeleton />
+    </>
   )
 }

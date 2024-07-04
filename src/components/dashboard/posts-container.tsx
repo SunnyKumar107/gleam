@@ -4,6 +4,7 @@ import { getPostTable } from '@/actions/post'
 import React, { useEffect, useState } from 'react'
 import Post from './post'
 import { LoaderCircle } from 'lucide-react'
+import { PostsSkeleton } from './skeletons'
 
 type PostType = {
   id: string
@@ -35,7 +36,9 @@ export default function PostsContainer() {
 
   useEffect(() => {
     const fetchPosts = async () => {
+      setLoading(true)
       const initialData = await getPostTable({ page, limit: 15 })
+      setLoading(false)
       setPosts(initialData)
     }
 
@@ -75,12 +78,8 @@ export default function PostsContainer() {
         {posts.map((post) => (
           <Post key={post.id} post={post} />
         ))}
+        {loading && <PostsSkeleton />}
       </div>
-      {loading && (
-        <div>
-          <LoaderCircle className="mx-auto mb-0.5 h-6 w-6 animate-spin" />
-        </div>
-      )}
     </div>
   )
 }
