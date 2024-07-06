@@ -2,15 +2,7 @@
 
 import { usePathname } from 'next/navigation'
 import { cn } from '@/lib/utils'
-import {
-  Bell,
-  Home,
-  MessageCircleMore,
-  Settings,
-  Star,
-  Telescope,
-  Plus
-} from 'lucide-react'
+import { Home, Star, Telescope, Search } from 'lucide-react'
 import Link from 'next/link'
 
 const links = [
@@ -20,14 +12,19 @@ const links = [
     icon: Home
   },
   {
-    name: 'Favorites',
-    href: '/dashboard/favorites',
-    icon: Star
+    name: 'Search',
+    href: '/dashboard/search',
+    icon: Search
   },
   {
     name: 'Discover',
     href: '/dashboard/discover',
     icon: Telescope
+  },
+  {
+    name: 'Favorites',
+    href: '/dashboard/favorites',
+    icon: Star
   }
   // New features will be added
 

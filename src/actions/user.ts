@@ -122,6 +122,19 @@ export async function getUserByUsername(username: string) {
   }
 }
 
+export async function getUserTable() {
+  try {
+    const users = await prisma.user.findMany({
+      orderBy: {
+        createdAt: 'desc'
+      }
+    })
+    return users
+  } catch (error) {
+    throw new Error('Failed to fetch all users')
+  }
+}
+
 export async function getSuggestedUsers(userId: string) {
   try {
     const suggestedUsers = await prisma.user.findMany({

@@ -9,8 +9,10 @@ export default async function Followers({
   params: { username: string }
 }) {
   const session = await auth()
+  if (!session) return
+
   const followers = await getFollowersByUsername(params.username)
-  const user = await getUserByUsername(session?.user.username as string)
+  const user = await getUserByUsername(session.user.username)
 
   return (
     <main className="min-h-screen">
