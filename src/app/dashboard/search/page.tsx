@@ -3,7 +3,7 @@
 import { getUserByUsername, getUserTable } from '@/actions/user'
 import User from '@/components/dashboard/user'
 import { Input } from '@/components/ui/input'
-import { User as UserIcon } from 'lucide-react'
+import { Search, User as UserIcon } from 'lucide-react'
 import { useSession } from 'next-auth/react'
 import { useEffect, useState } from 'react'
 
@@ -82,7 +82,10 @@ export default function SearchPage() {
           </>
         ) : (
           <div className="flex h-full flex-col items-center justify-center gap-4">
-            <h1 className="font-semi-bold text-4xl text-foreground/40">
+            <div className="text-primary/30">
+              <Search size={80} strokeWidth={2} />
+            </div>
+            <h1 className="font-semi-bold text-6xl text-foreground/30">
               Search
             </h1>
           </div>

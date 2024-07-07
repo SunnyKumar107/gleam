@@ -33,7 +33,7 @@ const User = ({
   const { data: session } = useSession()
 
   return (
-    <div className="flex h-[180px] w-[180px] flex-col items-center gap-2 rounded-md bg-primary-foreground p-2 shadow">
+    <div className="flex h-[195px] w-[180px] flex-col items-center gap-2 rounded-md bg-primary-foreground p-2 shadow">
       <Link
         href={
           session?.user.username === user.username
@@ -56,8 +56,10 @@ const User = ({
             ? '/dashboard/profile'
             : `/dashboard/user/${user.username}`
         }
+        className="flex flex-col items-center"
       >
         <h3 className="text-lg font-medium">{user.name}</h3>
+        <p className="-mt-1 text-sm text-foreground/60">@{user.username}</p>
       </Link>
       {loginUser.id !== user.id ? (
         <FollowButton following={loginUser.following} userId={user.id} />

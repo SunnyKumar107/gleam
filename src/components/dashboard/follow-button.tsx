@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import { Button } from '../ui/button'
 import { useSession } from 'next-auth/react'
 import { followUser, unfollowUser } from '@/actions/user'
+import { cn } from '@/lib/utils'
 
 type followingProps = {
   id: string
@@ -56,7 +57,7 @@ const FollowButton = ({
   return (
     <Button
       variant={isFollow ? 'secondary' : 'default'}
-      className="w-full max-w-72"
+      className={cn('w-full max-w-72', { 'h-9': following })}
       onClick={handleFollow}
     >
       {isFollow ? 'Following' : 'Follow'}
